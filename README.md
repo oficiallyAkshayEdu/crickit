@@ -1,7 +1,13 @@
-
 #Crick-It
-[![Build Status](https://travis-ci.org/oficiallyAkshayEdu/crickit.svg?branch=master)](https://travis-ci.org/oficiallyAkshayEdu/crickit)
 
+[![Build Status](https://travis-ci.org/oficiallyAkshayEdu/crickit.svg?branch=master)](https://travis-ci.org/oficiallyAkshayEdu/crickit)
+[![codecov](https://codecov.io/gh/oficiallyAkshayEdu/crickit/branch/master/graph/badge.svg)](https://codecov.io/gh/oficiallyAkshayEdu/crickit)
+[![Maintainability](https://api.codeclimate.com/v1/badges/28613489cf646368e3cd/maintainability)](https://codeclimate.com/github/oficiallyAkshayEdu/crickit/maintainability)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+[![GitHub version](https://badge.fury.io/gh/oficiallyAkshayEdu%2Fcrickit.svg)](https://badge.fury.io/gh/oficiallyAkshayEdu%2Fcrickit)
+[![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
+[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
+[![GitHub issues](https://img.shields.io/github/issues/oficiallyAkshayEdu/crickit.svg)](https://github.com/oficiallyAkshayEdu/crickit/issues)
 
 Crickit is a text-based cricket simulator.
 
