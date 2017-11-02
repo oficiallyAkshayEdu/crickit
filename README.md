@@ -1,4 +1,4 @@
-# Crick-It
+#Crick-It
 
 [![Build Status](https://travis-ci.org/oficiallyAkshayEdu/crickit.svg?branch=master)](https://travis-ci.org/oficiallyAkshayEdu/crickit)
 [![codecov](https://codecov.io/gh/oficiallyAkshayEdu/crickit/branch/master/graph/badge.svg)](https://codecov.io/gh/oficiallyAkshayEdu/crickit)
@@ -12,15 +12,15 @@
 Crickit is a text-based cricket simulator.
 
 
-### Instructions
+###Instructions
 To run program, download files or clone this git and run the program in your IDE, which should invoke this function
 ```python
 playCricket()
 ```
 
-### Roadmap
+###Roadmap
 
-###### Future Releases
+######Future Releases
 1. Simulate game based on current player of the team
 2. Simulate an entire T20 tournament
     1.  Create directory/dictionary/file of teams and their stats
@@ -29,15 +29,15 @@ playCricket()
 
 
 
-### Contributions Welcome
+###Contributions Welcome
 
-###### 11th november 2017
+######11th november 2017
 Initial Commit working two team cricket game
 
 
-### Author Information
+###Author Information
 
 Created by [Akshay Agrawal](https://en.wikipedia.org/wiki/Akshay_Agrawal) at ArtCenter College of Design
 
-##### License Information
+#####License Information
 The MIT License
