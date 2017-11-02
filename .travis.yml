@@ -8,7 +8,6 @@ script:
   - python playCricket.py
   - python simulate.py
   - coverage run playCricket.py
-  - coverage python playCricket.py
 
 after_success:
   - codecov
