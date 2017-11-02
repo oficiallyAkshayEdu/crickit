@@ -2,7 +2,7 @@ language: python
 python:
   - "3.6"
 install:
-  - pin install
+  - pip install
 script:
   - py playCricket.py # or py.test for Python versions 3.5 and below
   - python playCricket.py
