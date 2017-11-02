@@ -14,4 +14,6 @@ def simulateXTimes():
     print("\n")
     print("India won {}% matches, Pakistan won {}% Matches".format((IndiaWinCount*100)/simulateCount, (PakistanWinCount*100)/simulateCount))
 
-simulateXTimes()
+
+if __name__ == "__main__":
+    simulateXTimes()

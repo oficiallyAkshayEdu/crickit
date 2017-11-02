@@ -163,7 +163,8 @@ def playCricket():
 
 
 
-playCricket()
+if __name__ == "__main__":
+    playCricket()
 
 #TODO stretch goals
 # todo if no runs - decalre and print - maiden
