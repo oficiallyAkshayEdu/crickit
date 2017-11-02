@@ -1,8 +1,10 @@
 language: python
 python:
-
   - "3.6"
- # command to install dependencies
-# command to run tests
+install:
+  - pin install
 script:
   - py playCricket.py # or py.test for Python versions 3.5 and below
+  - python playCricket.py
+  - py3 playCricket.py
+  - playCricket.py
