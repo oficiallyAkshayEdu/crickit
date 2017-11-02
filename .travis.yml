@@ -3,8 +3,12 @@ python:
   - "3.6"
 install:
   - pip install
-  - pip install codecov
+  - coverage run playCricket.py
+  - coverage python playCricket.py
+
 script:
   - python playCricket.py
   - python simulate.py
+
+after_success:
   - codecov
