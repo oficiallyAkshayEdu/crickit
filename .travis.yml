@@ -1,19 +1,24 @@
+#Defines the language for Travis to build an instance for
 language: python
+
 python:
   - "3.6"
 
+#changes directory to sub-directory "crick-it"
 before_install:
   - cd crick-it
 
+#installs dependencies
 install:
   - pip install
   - pip install coverage
   - pip install codecov
 
+#tests both key scripts
 script:
-  - python playCricket.py
   - python simulate.py
-  - coverage run playCricket.py
+  - coverage run simmulate.py
 
+#pushes report to codecov for visualization
 after_success:
   - codecov
