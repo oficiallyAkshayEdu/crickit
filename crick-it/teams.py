@@ -1,5 +1,4 @@
-from imports import *
-
+# from imports import *
 
 # The Teams class
 class Teams:
@@ -36,7 +35,7 @@ class Teams:
     def resetBallCountPerOver(self):
         self.ballCountPerOver = 0
 
-    def __init__ (self, name, tossCall, noBall, wideBall,wicketBall, regularBall):
+    def __init__ (self, name, tossCall, noBall, wideBall,wicketBall, regularBall, maxBallDifficulty,bestBatSkill):
         self.tossCall = tossCall
         self.playCall = "Bat"
         self.name = name
@@ -44,21 +43,13 @@ class Teams:
         self.wideball = wideBall
         self.wicketBall = wicketBall
         self.regularBall = regularBall
-        self.maxBallDifficulty = 0.2
-        self.bestBatSkill = 0.9
+        self.maxBallDifficulty = maxBallDifficulty
+        self.bestBatSkill = bestBatSkill
+
         self.ballTypes = ['wideBall'] * int(wideBall*100) + ["noBall"]*(int(noBall*100)) + ['wicketBall']*int((wicketBall*100)) + ['regularBall']*int((regularBall*100))
         self.overCount = 0
-
-        # self.InningScores =[]
         Teams.listTeams.append(self)
 
     def __repr__(self):
         return self.name
 
-################## Define all the teams and their characteristics ##################
-
-India = Teams("India", "Heads",0.3,0.35, 0.2,0.5)
-Pakistan = Teams("Pakistan", "Tails",0.2, 0.45, 0.1,0.8)
-# Australia = Teams("Australia", "Heads", "Bowl", 1,1)
-# England = Teams("England", "Heads", "Bowl", 0,0)
-# Zimbabwe = Teams("Zimbabwe", 0.9, "Heads", "Bowl", 0.06)

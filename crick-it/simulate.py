@@ -1,11 +1,11 @@
 from playCricket import *
 
-simulateCount = 10
+simulateCount = 100
 
 def simulateXTimes():
     IndiaWinCount = 0
     PakistanWinCount = 0
-    for i in range(simulateCount+1):
+    for i in range(simulateCount):
         winner = playCricket()
         if winner == India:
             IndiaWinCount +=1
