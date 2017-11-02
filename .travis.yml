@@ -7,6 +7,7 @@ install:
   - pip install codecov
 
 script:
+  - cd/crick-it
   - python playCricket.py
   - python simulate.py
   - coverage run playCricket.py

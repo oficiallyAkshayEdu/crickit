@@ -22,16 +22,16 @@ India22 = {
     'maxBallDifficulty':0.85,
     'bestBatSkill': 0.65
 }
-
-class testTeams:
-
-    def __init__ (self, **entries):
-        self.__dict__.update(entries)
-    def __repr__(self):
-        return self.name
-
-India32 = testTeams(**India22)
-
-India32
-print(India32.bestBatSkill)
+#
+# class testTeams:
+#
+#     def __init__ (self, **entries):
+#         self.__dict__.update(entries)
+#     def __repr__(self):
+#         return self.name
+#
+# India32 = testTeams(**India22)
+#
+# India32
+# print(India32.bestBatSkill)
 
