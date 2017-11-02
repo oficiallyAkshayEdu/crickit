@@ -1,5 +1,7 @@
 
 #Crick-It
+[![Build Status](https://travis-ci.org/oficiallyAkshayEdu/crickit.svg?branch=master)](https://travis-ci.org/oficiallyAkshayEdu/crickit)
+
 
 Crickit is a text-based cricket simulator.
 

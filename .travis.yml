@@ -3,6 +3,8 @@ python:
   - "3.6"
 install:
   - pip install
+  - pip install codecov
 script:
   - python playCricket.py
   - python simulate.py
+  - codecov
