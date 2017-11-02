@@ -1,13 +1,16 @@
 language: python
 python:
   - "3.6"
+
+before_install:
+  - cd crick-it
+
 install:
   - pip install
   - pip install coverage
   - pip install codecov
 
 script:
-  - cd crick-it
   - python playCricket.py
   - python simulate.py
   - coverage run playCricket.py
