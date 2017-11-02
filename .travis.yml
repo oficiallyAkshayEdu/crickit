@@ -4,7 +4,5 @@ python:
 install:
   - pip install
 script:
-  - py playCricket.py # or py.test for Python versions 3.5 and below
   - python playCricket.py
-  - py3 playCricket.py
-  - playCricket.py
+  - python simulate.py
