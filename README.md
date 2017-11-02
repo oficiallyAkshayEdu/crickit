@@ -1,7 +1,35 @@
 
-# crickit
+#Crick-It
 
-License Information
-[![License: CC BY 4.0](https://licensebuttons.net/l/by/4.0/80x15.png)](https://creativecommons.org/licenses/by/4.0/)
+Crickit is a text-based cricket simulator.
 
-[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+
+###Instructions
+To run program, download files or clone this git and run the program in your IDE, which should invoke this function
+```python
+playCricket()
+```
+
+###Roadmap
+
+######Future Releases
+1. Simulate game based on current player of the team
+2. Simulate an entire T20 tournament
+    1.  Create directory/dictionary/file of teams and their stats
+    2.  Create directory of teams for each team with individual stats
+3. Bug fixes, tuning
+
+
+
+###Contributions Welcome
+
+######11th november 2017
+Initial Commit working two team cricket game
+
+
+###Author Information
+
+Created by [Akshay Agrawal](https://en.wikipedia.org/wiki/Akshay_Agrawal) at ArtCenter College of Design
+
+#####License Information
+The MIT License

@@ -149,6 +149,8 @@ def declareWinner(teams):
     else:
         print("{} wins by {} runs".format(winningTeam, differenceInScore))
 
+    return winningTeam
+
 
 # sets up game and passes each playing team as argument to Innings
 def playCricket():
@@ -156,8 +158,8 @@ def playCricket():
     bowlingOrderTeams = battingOrderTeams[::-1]
     for i in range(2):
         Innings(battingOrderTeams[i], bowlingOrderTeams[i])
-    declareWinner(battingOrderTeams)
-
+    theWinner = declareWinner(battingOrderTeams)
+    return theWinner
 
 
 
