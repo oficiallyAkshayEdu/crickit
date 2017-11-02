@@ -1,6 +1,6 @@
 from playCricket import *
 
-simulateCount = 100
+simulateCount = 10
 
 def simulateXTimes():
     IndiaWinCount = 0
