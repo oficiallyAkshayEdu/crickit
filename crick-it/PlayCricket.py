@@ -2,23 +2,28 @@
 from imports import *
 
 coinFaces = ["Heads", "Tails"]
+
+# A T20 Match has 20 overs
 OVER_COUNT = 20
+'''
+Picks playing teams, creates team player list, does the coin toss which determines playing order.
+Pl note this is a futuristic feature - this will probably be used in the future when Crickit develops
+into a multi-team multi-player tournament simulator
+'''
 
 
-# Picks playing teams, creates team player list, does the coin toss which determines playing order.
 def setup():
-    # picks teams
+    # picks teams from the various defined teams
     pickedTeams = teamPicker()
     
-    # saves battingOrder
+    # saves the returned batting order
     battingOrderTeams = coinToss(pickedTeams)
     return battingOrderTeams
 
-
 def teamPicker():
+    #randomly picks two teams from the list of all the teams
     playingTeams = random.sample(Teams.listTeams, 2)
     return playingTeams
-
 
 def coinToss(thePickedTeams):
     # Initilizations
@@ -34,11 +39,14 @@ def coinToss(thePickedTeams):
     print(callingTeam, "calls", callingTeam.tossCall)
     print("The coin lands with", tossresult, "face up")
 
-    # Creates the batting order
+    # Creates the order the teams will bat - the "batting order"
     for i in range(len(thePickedTeams)):
         if tossresult == thePickedTeams[i].tossCall:
             tossWinningTeam = thePickedTeams[i]
             battingOrderTeams.append(thePickedTeams[i])
+
+            #assigns the team other than the winning team as the SECOND batting team
+
             if i == 1:
                 j = 0
                 battingOrderTeams.append(thePickedTeams[j])
@@ -47,12 +55,12 @@ def coinToss(thePickedTeams):
                 battingOrderTeams.append(thePickedTeams[j])
 
     print(tossWinningTeam, "wins and decides to", tossWinningTeam.playCall, "first")
-
     return battingOrderTeams
 
 
-
 def batHit(battingTeam, bowlingTeam):
+    # FUnction determines how many runs are scored off a ball which has been hit by the batsman
+
     batSkill = random.uniform(0, battingTeam.bestBatSkill)
     bowlSkill = random.uniform(0, bowlingTeam.maxBallDifficulty)
     if batSkill > bowlSkill:
@@ -61,14 +69,9 @@ def batHit(battingTeam, bowlingTeam):
         return result
 
     elif batSkill == bowlSkill:
-        return random.randint(0,2)
-
+        return random.randint(0,4)
     else:
-        battingTeam.boldOut()
-        return 0
-
-def printStats(battingTeam, bowlingTeam):
-    print("\rOvers: {} Runs: {} Wickets: ".format(bowlingTeam.overCount+1,battingTeam.runScore), end='',flush=True)
+        return random.randint(0,2)
 
 def nextInning(battingTeam, bowlingTeam):
     bowlingTeam.ballCountPerOver = 6
@@ -85,10 +88,6 @@ def delivery(battingTeam, bowlingTeam):
     battingTeam.playedOvers = bowlingTeam.overCount
     isGameFinished(battingTeam, bowlingTeam)
     theBallType = random.choice(bowlingTeam.ballTypes)
-
-
-
-
     if theBallType == "regularBall":
         runs = batHit(battingTeam, bowlingTeam)
         # print(runs, "- ", end='', flush=True)
@@ -146,6 +145,9 @@ def declareWinner(teams):
 
     if teams[0].wicketCount > teams[1].wicketCount:
         print("{} wins by {} wickets".format(winningTeam, differenceInWickets))
+    elif teams[0].runScore == teams[1].runScore:
+        print("The game is tied!")
+        winningTeam = "None"
     else:
         print("{} wins by {} runs".format(winningTeam, differenceInScore))
 
@@ -164,7 +166,10 @@ def playCricket():
 
 
 if __name__ == "__main__":
+    # print("hello")
     playCricket()
+# elif __name__ == "simulate":
+#     print("hello there")
 
 #TODO stretch goals
 # todo if no runs - decalre and print - maiden

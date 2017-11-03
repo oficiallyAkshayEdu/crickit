@@ -1,4 +1,5 @@
 # from imports import *
+from teamsList import *
 
 # The Teams class
 class Teams:
@@ -35,21 +36,16 @@ class Teams:
     def resetBallCountPerOver(self):
         self.ballCountPerOver = 0
 
-    def __init__ (self, name, tossCall, noBall, wideBall,wicketBall, regularBall, maxBallDifficulty,bestBatSkill):
-        self.tossCall = tossCall
-        self.playCall = "Bat"
-        self.name = name
-        self.noBall = noBall
-        self.wideball = wideBall
-        self.wicketBall = wicketBall
-        self.regularBall = regularBall
-        self.maxBallDifficulty = maxBallDifficulty
-        self.bestBatSkill = bestBatSkill
-
-        self.ballTypes = ['wideBall'] * int(wideBall*100) + ["noBall"]*(int(noBall*100)) + ['wicketBall']*int((wicketBall*100)) + ['regularBall']*int((regularBall*100))
+    def __init__ (self, **entries):
+        self.__dict__.update(entries)
+        self.ballTypes = ['wideBall'] * int(self.wideBall*100) + ["noBall"]*(int(self.noBall*100)) + ['wicketBall']*int((self.wicketBall*100)) + ['regularBall']*int((self.regularBall*100))
         self.overCount = 0
+        self.playCall = "Bat"
         Teams.listTeams.append(self)
 
     def __repr__(self):
         return self.name
 
+
+India = Teams(**INDIA)
+Pakistan = Teams(**PAKISTAN)
