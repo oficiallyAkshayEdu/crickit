@@ -11,6 +11,11 @@
 
 Crickit is a text-based cricket simulator.
 
+### Available teams
+* India
+* Pakistan
+
+Team Data Contributions welcome
 
 ### Instructions
 To run program, download files or clone this git and run the program in your IDE, which should invoke this function
@@ -33,6 +38,8 @@ n(default = 100)
 
 ### Roadmap
 
+1. Refactor based on actual cricket data stats (Strike rate, economy rate etc)
+    1. Currently its modelled on the probability of wide ball, no ball, wicket Ball etc, which are not standard cricket stats
 ###### Future Releases
 1. Simulate game based on current player of the team
 2. Simulate an entire T20 tournament
