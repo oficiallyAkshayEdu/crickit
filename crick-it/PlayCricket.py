@@ -5,57 +5,51 @@ coinFaces = ["Heads", "Tails"]
 
 # A T20 Match has 20 overs
 OVER_COUNT = 20
-'''
-Picks playing teams, creates team player list, does the coin toss which determines playing order.
-Pl note this is a futuristic feature - this will probably be used in the future when Crickit develops
-into a multi-team multi-player tournament simulator
-'''
+NUM_MATCHES = 1
 
 
-def setup():
+def startMatch(matchID,teamOne,teamTwo):
+    coinToss(matchID)
+    Innings(teamOne, teamTwo)
+    Innings(teamTwo, teamOne)
+    declareMatchWinner(matchID)
+
+def playMatch(teamOne, teamTwo):
+    MATCH_ID = str(uuid.uuid4())
+
+    MATCH_ID = Match(MATCH_ID)
+    MATCH_ID.playingTeams.append(teamOne)
+    MATCH_ID.playingTeams.append(teamTwo)
+    startMatch(MATCH_ID, teamOne, teamTwo)
+
+def chooseMatchTeamsForTournament(match):
     # picks teams from the various defined teams
-    pickedTeams = teamPicker()
-    
-    # saves the returned batting order
-    battingOrderTeams = coinToss(pickedTeams)
-    return battingOrderTeams
+    match.playingTeams = random.sample(Teams.listTeams, 2)
 
-def teamPicker():
-    #randomly picks two teams from the list of all the teams
-    playingTeams = random.sample(Teams.listTeams, 2)
-    return playingTeams
-
-def coinToss(thePickedTeams):
-    # Initilizations
-    tossWinningTeam = []
-    battingOrderTeams = []
-
-    # Assignments
-    callingTeam = random.choice(thePickedTeams)
-    tossresult = random.choice(coinFaces)
+def coinToss(match):
+    match.tossResult = random.choice(coinFaces)
+    match.callingTeam = random.choice(match.playingTeams)
+    match.coinCalledByCallingTeam = random.choice(coinFaces)
+    TheCallingTeam = match.callingTeam
+    TheTossResult = match.tossResult
 
     # print Block
-    print("The coin is tossed...")
-    print(callingTeam, "calls", callingTeam.tossCall)
-    print("The coin lands with", tossresult, "face up")
+    match.tempPlayingTeams = match.playingTeams
 
-    # Creates the order the teams will bat - the "batting order"
-    for i in range(len(thePickedTeams)):
-        if tossresult == thePickedTeams[i].tossCall:
-            tossWinningTeam = thePickedTeams[i]
-            battingOrderTeams.append(thePickedTeams[i])
+    if TheTossResult == match.coinCalledByCallingTeam:
+        match.tossWinningTeam = match.callingTeam
+        match.battingOrder.append(match.callingTeam)
+        match.tempPlayingTeams.remove(match.callingTeam)
+        match.battingOrder.append(match.tempPlayingTeams[0])
+    else:
+        match.tempPlayingTeams.remove(match.callingTeam)
+        match.battingOrder.append(match.tempPlayingTeams[0])
+        match.tossWinningTeam = match.tempPlayingTeams[0]
+        match.battingOrder.append(match.callingTeam)
 
-            #assigns the team other than the winning team as the SECOND batting team
 
-            if i == 1:
-                j = 0
-                battingOrderTeams.append(thePickedTeams[j])
-            else:
-                j = 1
-                battingOrderTeams.append(thePickedTeams[j])
-
-    print(tossWinningTeam, "wins and decides to", tossWinningTeam.playCall, "first")
-    return battingOrderTeams
+    match.bowlingOrder = match.battingOrder[::-1]
+    TheTossWinningTeam = match.tossWinningTeam
 
 
 def batHit(battingTeam, bowlingTeam):
@@ -105,17 +99,9 @@ def delivery(battingTeam, bowlingTeam):
 
 def over(battingTeam, bowlingTeam):
     bowlingTeam.resetBallCountPerOver()
-
-    # todo add delivery function here
-    # todo check if game has been won
-
     while bowlingTeam.ballCountPerOver <= 5:
         delivery(battingTeam, bowlingTeam)
         bowlingTeam.plusBallCountPerOver()
-
-        # time.sleep(0.5)
-
-
 
 def Innings(battingTeam, bowlingTeam):
 
@@ -124,52 +110,24 @@ def Innings(battingTeam, bowlingTeam):
     bowlingTeam.resetBowlingInnings()
     while bowlingTeam.overCount < OVER_COUNT:
         over(battingTeam, bowlingTeam)
-        # print("")
+
         bowlingTeam.plusInningsOverCount()
-    print("{} played a total of {} overs, scored {} runs and lost {} wickets".format(battingTeam, battingTeam.playedOvers, battingTeam.runScore, battingTeam.wicketCount))
-    # print(battingTeam, "scored a total of", battingTeam.runScore, "runs at ", battingTeam.wicketCount, "wickets")
+    # print("{} played a total of {} overs, scored {} runs and lost {} wickets".format(battingTeam, battingTeam.playedOvers, battingTeam.runScore, battingTeam.wicketCount))
 
+def declareMatchWinner(match):
 
-def declareWinner(teams):
-    winningTeam = []
-    highestScore = 0
+    match.runScoreDelta = abs(match.battingOrder[0].runScore - match.battingOrder[1].runScore)
+    match.wicketDelta = abs(match.battingOrder[0].wicketCount - match.battingOrder[1].wicketCount)
+    for team in match.playingTeams:
+        if team.runScore > match.winningScore:
+            match.winningScore = team.runScore
+            match.InningsWinner = team
 
-    differenceInScore = abs(teams[0].runScore - teams[1].runScore)
-
-
-    differenceInWickets = abs(teams[0].wicketCount - teams[1].wicketCount)
-    for team in teams:
-        if team.runScore > highestScore:
-            highestScore = team.runScore
-            winningTeam = team
-
-    if teams[0].wicketCount > teams[1].wicketCount:
-        print("{} wins by {} wickets".format(winningTeam, differenceInWickets))
-    elif teams[0].runScore == teams[1].runScore:
-        print("The game is tied!")
-        winningTeam = "None"
-    else:
-        print("{} wins by {} runs".format(winningTeam, differenceInScore))
-
-    return winningTeam
-
-
-# sets up game and passes each playing team as argument to Innings
-def playCricket():
-    battingOrderTeams = setup()
-    bowlingOrderTeams = battingOrderTeams[::-1]
-    for i in range(2):
-        Innings(battingOrderTeams[i], bowlingOrderTeams[i])
-    theWinner = declareWinner(battingOrderTeams)
-    return theWinner
-
+    match.matchSummary()
 
 
 if __name__ == "__main__":
-    # print("hello")
-    playCricket()
-# elif __name__ == "simulate":
-#     print("hello there")
+    playMatch(India, Pakistan)
 
 #TODO stretch goals
 # todo if no runs - decalre and print - maiden

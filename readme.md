@@ -17,7 +17,13 @@ To run program, download files or clone this git and run the program in your IDE
 ```python
 playCricket()
 ```
+### API
 
+
+###### Simulate Match between two specific teams
+```python
+playMatch(team1, team2)
+```
 ### Roadmap
 
 ###### Future Releases

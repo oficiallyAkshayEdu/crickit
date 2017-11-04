@@ -24,3 +24,14 @@ PAKISTAN = {
     'maxBallDifficulty':0.85,
     'bestBatSkill': 0.65
 }
+
+ZIMBABWE = {
+    'name': "Zimbabwe",
+    'tossCall': "Tails",
+    'noBall': 0.15,
+    'wideBall': 0.05,
+    'wicketBall': 0.05,
+    'regularBall': 0.65,
+    'maxBallDifficulty':0.85,
+    'bestBatSkill': 0.65
+}
