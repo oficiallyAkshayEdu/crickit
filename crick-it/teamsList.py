@@ -10,7 +10,7 @@ INDIA = {
     'wicketBall': 0.05,
     'regularBall': 0.70,
     'maxBallDifficulty':0.75,
-    'bestBatSkill': 0.85
+    'bestBatSkill': 0.95
 }
 
 

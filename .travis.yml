@@ -17,7 +17,8 @@ install:
 #tests both key scripts
 script:
   - python PlayCricket.py
-  - coverage run PlayCricket.py
+  - python simulate.py
+  - coverage run simulate.py
 
 #pushes report to codecov for visualization
 after_success:

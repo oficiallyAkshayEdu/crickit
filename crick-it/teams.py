@@ -68,6 +68,16 @@ class Match:
     def __repr__(self):
         return self.matchID
 
+    def resetMatch(self):
+        self.winningScore = 0
+        self.winningTeamRuns = 0
+        self.winningTeamWickets = 0
+        self.losingTeamRuns = 0
+        self.losingTeamWickets = 0
+        self.runScoreDelta = 0
+        self.wicketDelta = 0
+        self.coinCalledByCallingTeam = ""
+
     def matchSummary(self):
         print("{} called {}, won the toss and decided to bat. {} won against {} by {} runs and {} wickets in {} overs".format(
             self.callingTeam, self.coinCalledByCallingTeam, self.InningsWinner, self.InningsLoser, self.runScoreDelta, self.wicketDelta, "TODO"))

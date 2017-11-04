@@ -20,10 +20,17 @@ playCricket()
 ### API
 
 
-###### Simulate Match between two specific teams
+###### Play a single Match between two specific teams
 ```python
 playMatch(team1, team2)
 ```
+
+###### Simulate n Matches between two specific teams
+```python
+simulateMatches(team1, team2, n)
+```
+n(default = 100)
+
 ### Roadmap
 
 ###### Future Releases

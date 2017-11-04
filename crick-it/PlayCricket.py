@@ -13,14 +13,23 @@ def startMatch(matchID,teamOne,teamTwo):
     Innings(teamOne, teamTwo)
     Innings(teamTwo, teamOne)
     declareMatchWinner(matchID)
+    return matchID.InningsWinner
 
-def playMatch(teamOne, teamTwo):
+def generateMATCH_ID():
     MATCH_ID = str(uuid.uuid4())
+    return MATCH_ID
 
-    MATCH_ID = Match(MATCH_ID)
+def createPlayingTeams(MATCH_ID, teamOne, teamTwo):
     MATCH_ID.playingTeams.append(teamOne)
     MATCH_ID.playingTeams.append(teamTwo)
+    print(MATCH_ID.playingTeams)
+
+def playMatch(teamOne, teamTwo):
+    MATCH_ID = generateMATCH_ID()
+    MATCH_ID = Match(MATCH_ID)
+    createPlayingTeams(MATCH_ID, teamOne, teamTwo)
     startMatch(MATCH_ID, teamOne, teamTwo)
+    return MATCH_ID.InningsWinner
 
 def chooseMatchTeamsForTournament(match):
     # picks teams from the various defined teams
@@ -34,7 +43,7 @@ def coinToss(match):
     TheTossResult = match.tossResult
 
     # print Block
-    match.tempPlayingTeams = match.playingTeams
+    match.tempPlayingTeams = list(match.playingTeams)
 
     if TheTossResult == match.coinCalledByCallingTeam:
         match.tossWinningTeam = match.callingTeam
@@ -122,6 +131,8 @@ def declareMatchWinner(match):
         if team.runScore > match.winningScore:
             match.winningScore = team.runScore
             match.InningsWinner = team
+
+    #todo account for tie condition
 
     match.matchSummary()
 
