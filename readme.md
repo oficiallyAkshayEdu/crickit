@@ -17,11 +17,7 @@ Crickit is a text-based cricket simulator.
 
 Team Data Contributions welcome
 
-### Instructions
-To run program, download files or clone this git and run the program in your IDE, which should invoke this function
-```python
-playCricket()
-```
+
 ### API
 
 
