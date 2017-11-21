@@ -39,16 +39,18 @@ def simulateMatches(teamOne, teamTwo, n = 100):
         else:
             MATCH_ID.ties +=1
         MATCH_ID.resetMatch()
+        print("\rMatches Played.:{} | {} won: {} | {} won:{} Matches Tied: {}".format(i, teamOne, MATCH_ID.t1_wins, teamTwo, MATCH_ID.t2_wins, MATCH_ID.ties), flush='true', end='')
+        # print("\r")
     return MATCH_ID
     printSummary(MATCH_ID)
 
 def printSummary(MATCH_ID):
     teamOne = MATCH_ID.battingOrder[0]
     teamTwo = MATCH_ID.battingOrder[1]
-    print("{} won {} matches, {} won {} matches and {} matches were tied".format(teamOne, MATCH_ID.t1_wins, teamTwo, MATCH_ID.t2_wins, MATCH_ID.ties))
+    print("\n{} won {} matches, {} won {} matches and {} matches were tied".format(teamOne, MATCH_ID.t1_wins, teamTwo, MATCH_ID.t2_wins, MATCH_ID.ties))
 
 if __name__ == "__main__":
-    blockPrint()
-    theMatchID = simulateMatches(India, Pakistan)
-    enablePrint()
+    # blockPrint()
+    theMatchID = simulateMatches(Pakistan, India, 100000)
+    # enablePrint()
     printSummary(theMatchID)

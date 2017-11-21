@@ -22,7 +22,6 @@ def generateMATCH_ID():
 def createPlayingTeams(MATCH_ID, teamOne, teamTwo):
     MATCH_ID.playingTeams.append(teamOne)
     MATCH_ID.playingTeams.append(teamTwo)
-    print(MATCH_ID.playingTeams)
 
 def playMatch(teamOne, teamTwo):
     MATCH_ID = generateMATCH_ID()
@@ -131,10 +130,11 @@ def declareMatchWinner(match):
         if team.runScore > match.winningScore:
             match.winningScore = team.runScore
             match.InningsWinner = team
+    # todo account for tie condition
 
-    #todo account for tie condition
+    if __name__ == "__main__":
 
-    match.matchSummary()
+        match.matchSummary()
 
 
 if __name__ == "__main__":

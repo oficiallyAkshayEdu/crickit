@@ -77,6 +77,8 @@ class Match:
         self.runScoreDelta = 0
         self.wicketDelta = 0
         self.coinCalledByCallingTeam = ""
+        self.InningsLoser = []
+        self.InningsWinner = []
 
     def matchSummary(self):
         print("{} called {}, won the toss and decided to bat. {} won against {} by {} runs and {} wickets in {} overs".format(
