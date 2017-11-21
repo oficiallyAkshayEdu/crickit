@@ -11,37 +11,29 @@ def enablePrint():
 
 
 class matchSimulator(Match):
-    def __init__(self, MATCH_ID):
-
-        self.MATCH_ID = MATCH_ID
+    def __init__(self):
         self.t1_wins = 0
         self.t2_wins = 0
         self.ties = 0
-        super(matchSimulator, self).__init__(self.MATCH_ID)
 
-def matchSimulatorSetup(teamOne, teamTwo):
-    MATCH_ID = generateMATCH_ID()
-    MATCH_ID = matchSimulator(MATCH_ID)
-    createPlayingTeams(MATCH_ID, teamOne, teamTwo)
-    return MATCH_ID
-
+def memManage():
+    India = None
+    Pakistan = None
 
 def simulateMatches(teamOne, teamTwo, n = 100):
     simulateCount = n
-    MATCH_ID = matchSimulatorSetup(teamOne, teamTwo)
-
+    simulatedMatch = matchSimulator()
     for i in range(simulateCount):
-        winner = startMatch(MATCH_ID, teamOne, teamTwo)
-        if winner == teamOne:
-            MATCH_ID.t1_wins +=1
-        elif winner == teamTwo:
-            MATCH_ID.t2_wins +=1
-        else:
-            MATCH_ID.ties +=1
-        MATCH_ID.resetMatch()
-        print("\rMatches Played.:{} | {} won: {} | {} won:{} Matches Tied: {}".format(i, teamOne, MATCH_ID.t1_wins, teamTwo, MATCH_ID.t2_wins, MATCH_ID.ties), flush='true', end='')
-        # print("\r")
-    return MATCH_ID
+        thewinner = playMatch(teamOne, teamTwo)
+        # print(thewinner)
+        # winner = thewinner.name
+        if thewinner == "draw":
+            simulatedMatch.ties +=1
+        elif thewinner.name == teamOne:
+            simulatedMatch.t1_wins +=1
+        elif thewinner.name == teamTwo:
+            simulatedMatch.t2_wins +=1
+        print("\rMatches Played.:{} | {} won: {} | {} won:{} Matches Tied: {}".format(i, teamOne, simulatedMatch.t1_wins, teamTwo, simulatedMatch.t2_wins, simulatedMatch.ties), flush='true', end='')
     printSummary(MATCH_ID)
 
 def printSummary(MATCH_ID):
@@ -50,7 +42,6 @@ def printSummary(MATCH_ID):
     print("\n{} won {} matches, {} won {} matches and {} matches were tied".format(teamOne, MATCH_ID.t1_wins, teamTwo, MATCH_ID.t2_wins, MATCH_ID.ties))
 
 if __name__ == "__main__":
-    # blockPrint()
-    theMatchID = simulateMatches(Pakistan, India, 100000)
-    # enablePrint()
-    printSummary(theMatchID)
+
+    theMatchID = simulateMatches("India", "Pakistan", 100000)
+

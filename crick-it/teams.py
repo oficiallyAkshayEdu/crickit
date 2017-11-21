@@ -4,7 +4,13 @@ from teamsList import *
 # The Teams class
 class Teams:
     #empty list to store all
-    listTeams = []
+    # listTeams = []
+    # allInit = []
+
+    def resetTeam(self):
+        self.runScore = 0
+        self.overCount = 0
+        self.ballCountPerOver =0
 
     def addRuns(self, runs=1):
         self.runScore += runs
@@ -41,7 +47,8 @@ class Teams:
         self.ballTypes = ['wideBall'] * int(self.wideBall*100) + ["noBall"]*(int(self.noBall*100)) + ['wicketBall']*int((self.wicketBall*100)) + ['regularBall']*int((self.regularBall*100))
         self.overCount = 0
         self.playCall = "Bat"
-        Teams.listTeams.append(self)
+        # Teams.listTeams.append(self)
+        # Teams.allInit.append(self)
 
     def __repr__(self):
         return self.name
@@ -65,11 +72,19 @@ class Match:
         self.runScoreDelta = 0
         self.wicketDelta = 0
         self.coinCalledByCallingTeam = ""
+
     def __repr__(self):
         return self.matchID
 
     def resetMatch(self):
+        self.tossWinningTeam = []
+        self.callingTeam = []
+        self.tossResult = []
+        self.battingOrder = []
+        self.bowlingOrder = []
         self.winningScore = 0
+        self.InningsWinner = []
+        self.InningsLoser = []
         self.winningTeamRuns = 0
         self.winningTeamWickets = 0
         self.losingTeamRuns = 0
@@ -77,14 +92,12 @@ class Match:
         self.runScoreDelta = 0
         self.wicketDelta = 0
         self.coinCalledByCallingTeam = ""
-        self.InningsLoser = []
-        self.InningsWinner = []
 
     def matchSummary(self):
         print("{} called {}, won the toss and decided to bat. {} won against {} by {} runs and {} wickets in {} overs".format(
             self.callingTeam, self.coinCalledByCallingTeam, self.InningsWinner, self.InningsLoser, self.runScoreDelta, self.wicketDelta, "TODO"))
 
 
-India = Teams(**INDIA)
-Pakistan = Teams(**PAKISTAN)
-Zimbabwe = Teams(**ZIMBABWE)
+# India = Teams(**INDIA)
+# Pakistan = Teams(**PAKISTAN)
+# Zimbabwe = Teams(**ZIMBABWE)
