@@ -34,7 +34,7 @@ def simulateMatches(teamOne, teamTwo, n = 100):
         elif thewinner.name == teamTwo:
             simulatedMatch.t2_wins +=1
         print("\rMatches Played.:{} | {} won: {} | {} won:{} Matches Tied: {}".format(i, teamOne, simulatedMatch.t1_wins, teamTwo, simulatedMatch.t2_wins, simulatedMatch.ties), flush='true', end='')
-    printSummary(MATCH_ID)
+    # printSummary(MATCH_ID)
 
 def printSummary(MATCH_ID):
     teamOne = MATCH_ID.battingOrder[0]
