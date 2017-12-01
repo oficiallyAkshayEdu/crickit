@@ -1,5 +1,4 @@
 # from imports import *
-from teamsList import *
 
 # The Teams class
 class Teams:
