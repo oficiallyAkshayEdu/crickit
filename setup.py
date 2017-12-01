@@ -6,7 +6,7 @@ def readme():
 
 setup(
     name='crickit',
-    version='0.0.1011-dev',
+    version='0.0.2',
     packages=['crickit'],
     url="https://github.com/oficiallyAkshayEdu/crickit",
     license='MITa',
