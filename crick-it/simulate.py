@@ -43,5 +43,5 @@ def printSummary(MATCH_ID):
 
 if __name__ == "__main__":
 
-    theMatchID = simulateMatches("India", "Pakistan", 100000)
+    theMatchID = simulateMatches("India", "Pakistan", 1000)
 
