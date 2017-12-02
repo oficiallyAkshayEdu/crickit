@@ -1,6 +1,6 @@
 
 *.pyc
 /.idea
-/dist
-/dist/*
 dist/
+MANIFEST
+crickit.egg-info/

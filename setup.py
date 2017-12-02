@@ -1,12 +1,12 @@
-from distutils.core import setup
+from setuptools import setup
 
 def readme():
-    with open('README.rst') as f:
-        return f.read()
+    thefile = open('README.rst')
+    return thefile.read()
 
 setup(
     name='crickit',
-    version='0.0.2',
+    version='0.0.1',
     packages=['crickit'],
     url="https://github.com/oficiallyAkshayEdu/crickit",
     license='MITa',

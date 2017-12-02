@@ -3,7 +3,6 @@ import sys
 
 from crickit.PlayCricket import *
 
-
 # Disable
 def blockPrint():
     sys.stdout = open(os.devnull, 'w')
