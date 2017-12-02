@@ -3,16 +3,12 @@ language: python
 
 python:
   - "2.7"
-  - "2.8"
-  - "2.9"
-  - "3.0"
-  - "3.1"
   - "3.2"
   - "3.3"
   - "3.4"
   - "3.5"
   - "3.6"
-  - "3.7"
+#  - "3.7"  # points ot nightly and hence fails. commenting for now.
 
 #changes directory to sub-directory "crick-it"
 before_install:
@@ -20,7 +16,7 @@ before_install:
 
 #installs dependencies
 install:
-  - pip install
+  - pip install -U pip
   - pip install coverage
   - pip install codecov
 

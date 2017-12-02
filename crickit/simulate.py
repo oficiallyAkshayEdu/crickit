@@ -35,7 +35,8 @@ def simulateMatches(teamOne, teamTwo, n = 100):
             simulatedMatch.t1_wins +=1
         elif thewinner.name == teamTwo:
             simulatedMatch.t2_wins +=1
-        print("\rMatches Played.:{} | {} won: {} | {} won:{} Matches Tied: {}".format(i, teamOne, simulatedMatch.t1_wins, teamTwo, simulatedMatch.t2_wins, simulatedMatch.ties), flush='true', end='')
+        # prntstr =
+        print("\rMatches Played.:{} | {} won: {} | {} won:{} Matches Tied: {}".format(i, teamOne, simulatedMatch.t1_wins, teamTwo, simulatedMatch.t2_wins, simulatedMatch.ties), flush=True, end='')
     # printSummary(MATCH_ID)
 
 def printSummary(MATCH_ID):
