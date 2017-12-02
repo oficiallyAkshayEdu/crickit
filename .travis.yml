@@ -20,7 +20,7 @@ install:
   - pip install -U coverage
   - pip install -U codecov
 
-after_install:
+before_script:
   - cd crickit
 
 #tests both key scripts
