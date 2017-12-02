@@ -20,7 +20,7 @@ if sys.argv[-1] == 'travis':
 
 setup(
     name='crickit',
-    version='0.1.19',
+    version='0.0.01',
     packages=['crickit'],
     url="https://github.com/oficiallyAkshayEdu/crickit",
     license='MITa',
