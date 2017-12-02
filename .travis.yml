@@ -11,15 +11,17 @@ python:
 #  - "3.7"  # points ot nightly and hence fails. commenting for now.
 
 #changes directory to sub-directory "crick-it"
-before_install:
-  - cd crickit
+
 
 #installs dependencies
 install:
   - pip install -U .
   - pip install -U pip
-  - pip install coverage
-  - pip install codecov
+  - pip install -U coverage
+  - pip install -U codecov
+
+after_install:
+  - cd crickit
 
 #tests both key scripts
 script:
@@ -30,3 +32,4 @@ script:
 #pushes report to codecov for visualization
 after_success:
   - codecov
+#  - python
