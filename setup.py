@@ -1,4 +1,4 @@
-from setuptools import setup
+from distutils.core import setup
 import os
 import sys
 
@@ -20,7 +20,7 @@ if sys.argv[-1] == 'travis':
 
 setup(
     name='crickit',
-    version='0.0.125',
+    version='0.0.126',
     packages=['crickit'],
     url="https://github.com/oficiallyAkshayEdu/crickit",
     license='MITa',
