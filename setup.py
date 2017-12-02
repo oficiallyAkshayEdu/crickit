@@ -15,12 +15,12 @@ if sys.argv[-1] == 'travis':
     if result == 0:
         os.system("coverage run crickit/simulate.py")
         os.system("coverage report")
-        os.system("python setup.py sdist upload")
+        # os.system("python setup.py sdist upload")
     sys.exit()
 
 setup(
     name='crickit',
-    version='0.0.1',
+    version='0.1.19',
     packages=['crickit'],
     url="https://github.com/oficiallyAkshayEdu/crickit",
     license='MITa',
