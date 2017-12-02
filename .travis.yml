@@ -8,10 +8,6 @@ python:
   - "3.6"
 #  - "3.7"  # points ot nightly and hence fails. commenting for now.
 
-#changes directory to sub-directory "crickit"
-before_script:
-  - cd crickit
-
 #tests both key scripts
 script:
   - python setup.py travis
