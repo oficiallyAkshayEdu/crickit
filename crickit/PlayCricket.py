@@ -1,110 +1,119 @@
-import random, time, os, sys, uuid
-from crickit.teams import *
+__all__ = ['playMatch']
+
+import random
+
+from crickit.Logger import *
 from crickit.teamsList import *
+from crickit.classes import *
 
-coinFaces = ["Heads", "Tails"]
 
-# A T20 Match has 20 overs
-OVER_COUNT = 20
 
-def startMatch(matchID,teamOne,teamTwo):
-    coinToss(matchID)
-    Innings(teamOne, teamTwo)
-    Innings(teamTwo, teamOne)
-    declareMatchWinner(matchID)
-    teamTwo.runScore = 0
-    return matchID.InningsWinner
+logger.setLevel('DEBUG')
 
-def generateMATCH_ID():
-    MATCH_ID = str(uuid.uuid4())
-    return MATCH_ID
+def start_match(match, teamOne, teamTwo):
+    logger.info("match started between {} and {}".format(teamOne, teamTwo))
+    coinToss(match)
+    Innings(teamOne, teamTwo, match)
+    Innings(teamTwo, teamOne, match)
+    declareMatchWinner(match)
+    # teamTwo.runScore = 0
+    return match.winner
+
+
+def generate_match_id():
+    return str(uuid.uuid4())
+
 
 def createPlayingTeams(MATCH_ID, teamOne, teamTwo):
     MATCH_ID.playingTeams.append(teamOne)
     MATCH_ID.playingTeams.append(teamTwo)
 
-def instantTeam(team):
-    if team =="India":
-       India = Teams(**INDIA)
-       return India
-    elif team == "Pakistan":
-        Pakistan = Teams(**PAKISTAN)
-        return Pakistan
+
+def instantTeam(*args):
+    for team in TEAMS_LIST:
+        for each in args:
+            if team['name'] == each:
+                theTeam = Teams(**team)
+                return theTeam
+
 
 def playMatch(teamOne, teamTwo):
-    MATCH_ID = generateMATCH_ID()
-    MATCH_ID = Match(MATCH_ID)
-    # instantTeam(teamOne)
+    match = Match()
+
     teamOne = instantTeam(teamOne)
-    # print(teamOne)
+    match.teamOne = teamOne
+
     teamTwo = instantTeam(teamTwo)
-    createPlayingTeams(MATCH_ID, teamOne, teamTwo)
-    startMatch(MATCH_ID, teamOne, teamTwo)
-    # MATCH_ID.resetMatch()
-    # print(MATCH_ID.InningsWinner, "the return val")
-    return MATCH_ID.InningsWinner
+    match.teamTwo = teamTwo
+
+    createPlayingTeams(match, teamOne, teamTwo)
+    start_match(match, teamOne, teamTwo)
+    return match
+
 
 def chooseMatchTeamsForTournament(match):
     # picks teams from the various defined teams
     match.playingTeams = random.sample(Teams.listTeams, 2)
 
-def coinToss(match):
-    match.tossResult = random.choice(coinFaces)
-    match.callingTeam = random.choice(match.playingTeams)
-    match.coinCalledByCallingTeam = random.choice(coinFaces)
-    TheCallingTeam = match.callingTeam
-    TheTossResult = match.tossResult
 
-    # print Block
+def coinToss(match):
+    match.toss = Toss()
+    toss = match.toss
+    toss.faceUp = random.choice(toss.coinFaces)
+    toss.calledBy = random.choice(match.playingTeams)
+    toss.calledFace = random.choice(toss.coinFaces)
     match.tempPlayingTeams = list(match.playingTeams)
 
-    if TheTossResult == match.coinCalledByCallingTeam:
-        match.tossWinningTeam = match.callingTeam
-        match.battingOrder.append(match.callingTeam)
-        match.tempPlayingTeams.remove(match.callingTeam)
+    if toss.faceUp == toss.calledFace:
+        toss.winner = toss.calledBy
+        match.battingOrder.append(toss.calledBy)
+        match.tempPlayingTeams.remove(toss.calledBy)
         match.battingOrder.append(match.tempPlayingTeams[0])
     else:
-        match.tempPlayingTeams.remove(match.callingTeam)
+        match.tempPlayingTeams.remove(toss.calledBy)
         match.battingOrder.append(match.tempPlayingTeams[0])
-        match.tossWinningTeam = match.tempPlayingTeams[0]
-        match.battingOrder.append(match.callingTeam)
-
+        toss.winner = match.tempPlayingTeams[0]
+        match.battingOrder.append(toss.calledBy)
 
     match.bowlingOrder = match.battingOrder[::-1]
-    TheTossWinningTeam = match.tossWinningTeam
 
 
 def batHit(battingTeam, bowlingTeam):
-    # FUnction determines how many runs are scored off a ball which has been hit by the batsman
+    # Function determines how many runs are scored off a ball which has been hit by the batsman
 
     # batSkill = random.uniform(0, battingTeam.bestBatSkill)
     # bowlSkill = random.uniform(0, bowlingTeam.maxBallDifficulty)
     batSkill = battingTeam.bestBatSkill
     bowlSkill = bowlingTeam.maxBallDifficulty
     if batSkill > bowlSkill:
-        result = random.randint(1,6)
+        result = random.randint(1, 6)
         # if result == 6:
         return result
 
     elif batSkill == bowlSkill:
-        return random.randint(0,4)
+        return random.randint(0, 4)
     else:
         battingTeam.boldOut()
         return 0
         # return random.randint(0,2)
+
 
 def nextInning(battingTeam, bowlingTeam):
     bowlingTeam.ballCountPerOver = 6
 
     bowlingTeam.overCount = 21
 
+
 def isGameFinished(battingTeam, bowlingTeam):
     if hasattr(bowlingTeam, 'runScore') and battingTeam.runScore > bowlingTeam.runScore:
         nextInning(battingTeam, bowlingTeam)
-    # elif battingTeam.wicketCount == 9:
-    #     nextInning(battingTeam, bowlingTeam)
+        # elif battingTeam.wicketCount == 9:
+        #     nextInning(battingTeam, bowlingTeam)
 
-def delivery(battingTeam, bowlingTeam):
+
+def delivery(battingTeam, bowlingTeam, theOver, match):
+    thisDelivery = Delivery()
+    theOver.deliveries.append(thisDelivery)
     battingTeam.playedOvers = bowlingTeam.overCount
 
     ballTypes = ["regularBall", "wicketBall"]
@@ -113,7 +122,7 @@ def delivery(battingTeam, bowlingTeam):
         runs = batHit(battingTeam, bowlingTeam)
         # print(runs, "- ", end='', flush=True)
         battingTeam.addRuns(runs)
-    elif theBallType =="wicketBall":
+    elif theBallType == "wicketBall":
         # print("W", battingTeam.wicketCount, " - ", end='', flush=True)
         battingTeam.boldOut()
     isGameFinished(battingTeam, bowlingTeam)
@@ -125,37 +134,56 @@ def delivery(battingTeam, bowlingTeam):
     #     battingTeam.addRuns()
 
 
-def over(battingTeam, bowlingTeam):
+def over(battingTeam, bowlingTeam, match):
+    thisOver = Over()
+    match.overs.append(thisOver)
     bowlingTeam.resetBallCountPerOver()
     while bowlingTeam.ballCountPerOver <= 5:
-        delivery(battingTeam, bowlingTeam)
+        delivery(battingTeam, bowlingTeam, thisOver, match)
         bowlingTeam.plusBallCountPerOver()
+    # logger.info(thisOver.deliveries[1])
+    # print(match.overs, "\n")
 
-def Innings(battingTeam, bowlingTeam):
 
+def Innings(battingTeam, bowlingTeam, match):
     # sets teams runScore to 0
     battingTeam.resetBattingInnings()
     bowlingTeam.resetBowlingInnings()
-    while bowlingTeam.overCount < OVER_COUNT:
-        over(battingTeam, bowlingTeam)
+    while bowlingTeam.overCount < match.OVER_COUNT:
+        over(battingTeam, bowlingTeam, match)
 
         bowlingTeam.plusInningsOverCount()
-    # print("{} played a total of {} overs, scored {} runs and lost {} wickets".format(battingTeam, battingTeam.playedOvers, battingTeam.runScore, battingTeam.wicketCount))
+        # print("{} played a total of {} overs, scored {} runs and lost {} wickets".format(battingTeam,
+        # battingTeam.playedOvers, battingTeam.runScore, battingTeam.wicketCount))
+    logger.info(len(match.overs))
+
+
+import operator
+
 
 def declareMatchWinner(match):
+    """
 
-    match.runScoreDelta = abs(match.battingOrder[0].runScore - match.battingOrder[1].runScore)
-    # match.wicketDelta = abs(match.battingOrder[0].wicketCount - match.battingOrder[1].wicketCount)
-    for team in match.playingTeams:
-        if team.runScore > match.winningScore:
-            match.winningScore = team.runScore
-            match.InningsWinner = team
-        elif match.runScoreDelta == 0:
-            match.InningsWinner = "draw"
+    :param match: the current match object
+    :return: none
+    """
+    # calculates difference between the batting scores of both placying teams
+    match.runScoreDelta = abs(match.teamOne.runScore - match.teamTwo.runScore)
+
+    # checks if match was a tie and writes to match object
+    if match.runScoreDelta == 0:
+        match.winner = "draw"
+    else:
+        winner = max(*match.playingTeams, key = operator.attrgetter('runScore'))
+        match.winner = winner
 
     if __name__ == "__main__":
         match.matchSummary()
 
+    return match.winner
 
+
+#
 if __name__ == "__main__":
+
     playMatch("India", "Pakistan")

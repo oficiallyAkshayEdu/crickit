@@ -1,9 +1,23 @@
 import unittest
 
-class TestStringMethods(unittest.TestCase):
+from crickit.match import *
 
-    def test_upper(self):
-        self.assertEqual('foo'.upper(), 'FOO')
+from crickit.PlayCricket import *
+from crickit.classes.teams import *
+
+
+class TestCrickit(unittest.TestCase):
+
+    def setup(self):
+        pass
+
+    def test_WinnerDeclaration(self):
+        match = playMatch("India","Pakistan")
+        result = declareMatchWinner(match)
+        self.assertIsInstance(result, Teams)
+
+    def tearDown(self):
+        pass
 
 if __name__ == '__main__':
     unittest.main()

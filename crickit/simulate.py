@@ -1,54 +1,52 @@
-import os
-import sys
-
-# from .PlayCricket import *
-# from teams import Match
-
+from crickit.Logger import *
 from crickit.PlayCricket import *
 
-# Disable
-def blockPrint():
-    sys.stdout = open(os.devnull, 'w')
+__all__ = ['simulateMatches']
 
-# Restore
-def enablePrint():
-    sys.stdout = sys.__stdout__
+logger.setLevel('WARNING')
 
 
-class matchSimulator(Match):
+class matchSimulator():
     def __init__(self):
         self.t1_wins = 0
         self.t2_wins = 0
         self.ties = 0
 
-def memManage():
-    India = None
-    Pakistan = None
+        #TODO
+        self.teamOne = []
+        self.teamTwo = []
+        self.teams = []
+        self.matchCount = 0
+        self.matches = []  #append all simulated matches here
+        self.totalBallsBowled = 0
+        self.totalOversBowled = 0
+        self.totalWicketsTaken = 0
+        # self.teamOne.meanRunScore = 0
+        # self.teamOne.meanWicketsTaken = 0
+        # OR self.teamOne.wicketsTaken.mean()
 
-def simulateMatches(teamOne, teamTwo, n = 100):
-    simulateCount = n
+def simulateMatches(teamOne, teamTwo, simulateCount = 100):
     simulatedMatch = matchSimulator()
     for i in range(simulateCount):
-        thewinner = playMatch(teamOne, teamTwo)
-        # print(thewinner)
-        # winner = thewinner.name
-        if thewinner == "draw":
-            simulatedMatch.ties +=1
-        elif thewinner.name == teamOne:
-            simulatedMatch.t1_wins +=1
-        elif thewinner.name == teamTwo:
-            simulatedMatch.t2_wins +=1
-        # prntstr =
-        print("\rMatches Played.:{} | {} won: {} | {} won:{} Matches Tied: {}".format(i, teamOne, simulatedMatch.t1_wins, teamTwo, simulatedMatch.t2_wins, simulatedMatch.ties), flush=True, end='')
-    # printSummary(MATCH_ID)
+        match = playMatch(teamOne, teamTwo)
 
-def printSummary(MATCH_ID):
-    teamOne = MATCH_ID.battingOrder[0]
-    teamTwo = MATCH_ID.battingOrder[1]
-    print("\n{} won {} matches, {} won {} matches and {} matches were tied".format(teamOne, MATCH_ID.t1_wins, teamTwo, MATCH_ID.t2_wins, MATCH_ID.ties))
+        if match.winner == "draw":
+            simulatedMatch.ties += 1
+        elif match.winner.name == teamOne:
+            simulatedMatch.t1_wins += 1
+        elif match.winner.name == teamTwo:
+            simulatedMatch.t2_wins += 1
+
+        print("\rMatches Played.:{} | {} won: {} | {} won:{} | Matches Tied: {}".format(i + 1, teamOne,
+                                                                                        simulatedMatch.t1_wins, teamTwo,
+                                                                                        simulatedMatch.t2_wins,
+                                                                                        simulatedMatch.ties),
+              flush = True, end = '')
+    return simulatedMatch
+
 
 if __name__ == "__main__":
 
-    theMatchID = simulateMatches("India", "Pakistan", 10)
+    simulatedaMatch = simulateMatches("India", "Pakistan", 10)
     print("\n")
-
+    print(simulatedaMatch.t1_wins)

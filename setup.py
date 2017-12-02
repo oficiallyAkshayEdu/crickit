@@ -2,9 +2,7 @@ from distutils.core import setup
 import os
 import sys
 
-def readme():
-    thefile = open('docs/README.rst')
-    return thefile.read()
+
 
 if sys.argv[-1] == 'travis':
     result = os.system("python crickit/PlayCricket.py")
@@ -15,8 +13,14 @@ if sys.argv[-1] == 'travis':
     if result == 0:
         os.system("coverage run crickit/simulate.py")
         os.system("coverage report")
-        # os.system("python setup.py sdist upload")
     sys.exit()
+
+if sys.argv[-1] == 'localtest':
+    result = os.system("python")
+
+def readme():
+    thefile = open('docs/README.rst')
+    return thefile.read()
 
 setup(
     name='crickit',
