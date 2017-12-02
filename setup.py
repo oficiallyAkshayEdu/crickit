@@ -27,7 +27,6 @@ setup(
     author='Akshay Agrawal',
     author_email='',
     description='Text based Cricket Simulator in Python',
-    long_description = readme(),
-    install_requires=[]
+    long_description = readme()
 )
 
