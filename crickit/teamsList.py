@@ -34,4 +34,4 @@ ZIMBABWE = {
     'regularBall': 0.65,
     'maxBallDifficulty':0.85,
     'bestBatSkill': 0.65
-}11
+}

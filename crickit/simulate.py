@@ -1,7 +1,7 @@
 import os
 import sys
 
-from crickit.PlayCricket import *
+from PlayCricket import *
 
 # Disable
 def blockPrint():

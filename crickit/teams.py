@@ -1,5 +1,3 @@
-# from imports import *
-
 # The Teams class
 class Teams:
     #empty list to store all
@@ -51,6 +49,7 @@ class Teams:
 
     def __repr__(self):
         return self.name
+
 
 class Match:
     def __init__(self, matchID):

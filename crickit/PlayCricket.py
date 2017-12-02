@@ -1,4 +1,5 @@
 # imports all imports from the import file
+from imports import  *
 
 coinFaces = ["Heads", "Tails"]
 
