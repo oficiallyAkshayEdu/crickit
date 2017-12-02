@@ -1,7 +1,10 @@
 import os
 import sys
 
-from PlayCricket import *
+# from .PlayCricket import *
+# from teams import Match
+
+from crickit.PlayCricket import *
 
 # Disable
 def blockPrint():
@@ -46,5 +49,6 @@ def printSummary(MATCH_ID):
 
 if __name__ == "__main__":
 
-    theMatchID = simulateMatches("India", "Pakistan", 1000)
+    theMatchID = simulateMatches("India", "Pakistan", 10)
+    print("\n")
 

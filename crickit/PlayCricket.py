@@ -1,5 +1,6 @@
-# imports all imports from the import file
-from imports import  *
+import random, time, os, sys, uuid
+from crickit.teams import *
+from crickit.teamsList import *
 
 coinFaces = ["Heads", "Tails"]
 
