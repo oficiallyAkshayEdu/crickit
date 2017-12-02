@@ -15,6 +15,7 @@ if sys.argv[-1] == 'travis':
     if result == 0:
         os.system("coverage run crickit/simulate.py")
         os.system("coverage report")
+        os.system("python setup.py sdist upload")
     sys.exit()
 
 setup(
