@@ -8,6 +8,10 @@ python:
   - "3.6"
 #  - "3.7"  # points ot nightly and hence fails. commenting for now.
 
+#changes directory to sub-directory "crickit"
+install:
+  - pip install -U .
+
 #tests both key scripts
 script:
   - python setup.py travis
