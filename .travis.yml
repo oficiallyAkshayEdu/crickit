@@ -10,17 +10,12 @@ python:
 
 #changes directory to sub-directory "crickit"
 before_script:
-  - cd ..
   - cd crickit
 
 #tests both key scripts
 script:
   - python setup.py travis
-#  - python PlayCricket.py
-#  - python simulate.py
-  - coverage run simulate.py
 
 #pushes report to codecov for visualization
 after_success:
   - codecov
-#  - python

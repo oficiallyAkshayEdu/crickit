@@ -7,18 +7,14 @@ def readme():
     return thefile.read()
 
 if sys.argv[-1] == 'travis':
-    os.system("python PlayCricket.py")
-    os.system("python simulate.py")
-
-if sys.argv[-1] == 'test':
-
-    result = os.system("python crickit/tests/tests.py")
+    result = os.system("python crickit/PlayCricket.py")
+    if result:
+        result = os.system("python crickit/simulate.py")
+    if result:
+        result = os.system("python crickit/tests/tests.py")
     if result == 0:
         os.system("coverage run crickit/simulate.py")
         os.system("coverage report")
-    # os.system("python setup.py sdist upload")
-    # os.system("python setup.py bdist_wheel upload")
-    # print("hello")
     sys.exit()
 
 setup(
