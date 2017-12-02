@@ -3,7 +3,7 @@ import os
 import sys
 
 def readme():
-    thefile = open('README.rst')
+    thefile = open('docs/README.rst')
     return thefile.read()
 
 if sys.argv[-1] == 'test':
