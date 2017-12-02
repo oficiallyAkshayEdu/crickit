@@ -2,31 +2,22 @@
 language: python
 
 python:
-  - "2.7"
-  - "3.2"
   - "3.3"
   - "3.4"
   - "3.5"
   - "3.6"
 #  - "3.7"  # points ot nightly and hence fails. commenting for now.
 
-#changes directory to sub-directory "crick-it"
-
-
-#installs dependencies
-install:
-  - pip install -U .
-  - pip install -U pip
-  - pip install -U coverage
-  - pip install -U codecov
-
+#changes directory to sub-directory "crickit"
 before_script:
+  - cd ..
   - cd crickit
 
 #tests both key scripts
 script:
-  - python PlayCricket.py
-  - python simulate.py
+  - python setup.py travis
+#  - python PlayCricket.py
+#  - python simulate.py
   - coverage run simulate.py
 
 #pushes report to codecov for visualization

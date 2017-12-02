@@ -6,6 +6,10 @@ def readme():
     thefile = open('docs/README.rst')
     return thefile.read()
 
+if sys.argv[-1] == 'travis':
+    os.system("python PlayCricket.py")
+    os.system("python simulate.py")
+
 if sys.argv[-1] == 'test':
 
     result = os.system("python crickit/tests/tests.py")
