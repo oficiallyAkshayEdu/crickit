@@ -1,2 +1,2 @@
-from crickit.PlayCricket import *
-from crickit.simulate import *
+from .PlayCricket import *
+from .simulate import *

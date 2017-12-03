@@ -1,4 +1,5 @@
 from uuid import uuid4
+__all__ = ['Match']
 
 class Match:
     def __init__(self):

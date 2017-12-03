@@ -1,2 +1,6 @@
 include docs/README.rst
+include crickit/classes/*
+include crickit/tests/*
+include crickit/classes
+include crickit/tests
 exclude crickit.egg-info
