@@ -23,6 +23,12 @@ class Match:
         # self.winningTeamWickets = 0
 
 
+    def createPlayingOrder(self):
+        self.battingOrder.append(self.winner)
+        self.battingOrder.append(filter(lambda x: x != self.toss.calledBy, self.playingTeams))
+
+        # Reverse batting order to create the bowling order.
+        self.bowlingOrder = self.battingOrder[::-1]
 
     def __repr__(self):
         return self.matchID

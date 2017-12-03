@@ -1,16 +1,21 @@
-import random
+import operator
 
 from crickit.Logger import *
-from crickit.teamsList import *
 from crickit.classes import *
+from crickit.teamsList import *
 
 __all__ = ['playMatch']
 
 logger.setLevel('DEBUG')
 
+
 def start_match(match, teamOne, teamTwo):
-    logger.info("match started between {} and {}".format(teamOne, teamTwo))
-    coinToss(match)
+    logger.debug("match started between {} and {}".format(teamOne, teamTwo))
+
+    # creates Toss object, stores it in the match object
+    match.toss = Toss(match)
+    match.createPlayingOrder()  # creates playing order (batting and bowling order) within match object
+
     Innings(teamOne, teamTwo, match)
     Innings(teamTwo, teamOne, match)
     declareMatchWinner(match)
@@ -18,13 +23,9 @@ def start_match(match, teamOne, teamTwo):
     return match.winner
 
 
-def generate_match_id():
-    return str(uuid.uuid4())
-
-
-def createPlayingTeams(MATCH_ID, teamOne, teamTwo):
-    MATCH_ID.playingTeams.append(teamOne)
-    MATCH_ID.playingTeams.append(teamTwo)
+def createPlayingTeams(match, teamOne, teamTwo):
+    match.playingTeams.append(teamOne)
+    match.playingTeams.append(teamTwo)
 
 
 def instantTeam(*args):
@@ -139,8 +140,8 @@ def over(battingTeam, bowlingTeam, match):
     while bowlingTeam.ballCountPerOver <= 5:
         delivery(battingTeam, bowlingTeam, thisOver, match)
         bowlingTeam.plusBallCountPerOver()
-    # logger.info(thisOver.deliveries[1])
-    # print(match.overs, "\n")
+        # logger.info(thisOver.deliveries[1])
+        # print(match.overs, "\n")
 
 
 def Innings(battingTeam, bowlingTeam, match):
@@ -149,14 +150,7 @@ def Innings(battingTeam, bowlingTeam, match):
     bowlingTeam.resetBowlingInnings()
     while bowlingTeam.overCount < match.OVER_COUNT:
         over(battingTeam, bowlingTeam, match)
-
         bowlingTeam.plusInningsOverCount()
-        # print("{} played a total of {} overs, scored {} runs and lost {} wickets".format(battingTeam,
-        # battingTeam.playedOvers, battingTeam.runScore, battingTeam.wicketCount))
-    logger.info(len(match.overs))
-
-
-import operator
 
 
 def declareMatchWinner(match):
@@ -165,7 +159,7 @@ def declareMatchWinner(match):
     :param match: the current match object
     :return: none
     """
-    # calculates difference between the batting scores of both placying teams
+    # calculates difference between the batting scores of both playing teams
     match.runScoreDelta = abs(match.teamOne.runScore - match.teamTwo.runScore)
 
     # checks if match was a tie and writes to match object
@@ -179,9 +173,3 @@ def declareMatchWinner(match):
         match.matchSummary()
 
     return match.winner
-
-
-#
-if __name__ == "__main__":
-
-    playMatch("India", "Pakistan")

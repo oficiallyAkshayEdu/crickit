@@ -4,5 +4,5 @@
 dist/
 MANIFEST
 crickit.egg-info/
-test.py
-test.py
+sample.py
+sample.py

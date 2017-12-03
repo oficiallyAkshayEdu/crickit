@@ -43,10 +43,3 @@ def simulateMatches(teamOne, teamTwo, simulateCount = 100):
                                                                                         simulatedMatch.ties),
               flush = True, end = '')
     return simulatedMatch
-
-
-if __name__ == "__main__":
-
-    simulatedaMatch = simulateMatches("India", "Pakistan", 10)
-    print("\n")
-    print(simulatedaMatch.t1_wins)

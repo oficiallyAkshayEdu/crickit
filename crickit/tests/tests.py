@@ -4,6 +4,8 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 # import crickit
 
 from crickit import *
+# from crickit.classes import *
+
 
 class TestCrickit(unittest.TestCase):
 
@@ -12,9 +14,7 @@ class TestCrickit(unittest.TestCase):
 
     def test_WinnerDeclaration(self):
         match = playMatch("India","Pakistan")
-        # result = declareMatchWinner()
-        result = declareMatchWinner(match)
-        self.assertIsInstance(result, Teams)
+        self.assertIsInstance(match, Match)
 
     # def tearDown(self):
     #     pass
