@@ -1,12 +1,10 @@
-__all__ = ['playMatch']
-
 import random
 
 from crickit.Logger import *
 from crickit.teamsList import *
 from crickit.classes import *
 
-
+__all__ = ['playMatch']
 
 logger.setLevel('DEBUG')
 
