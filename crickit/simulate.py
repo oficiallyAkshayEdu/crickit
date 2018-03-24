@@ -25,6 +25,12 @@ class matchSimulator():
         # self.teamOne.meanWicketsTaken = 0
         # OR self.teamOne.wicketsTaken.mean()
 
+    def __repr__(self):
+        all_attr = ""
+        for attr, value in self.__dict__.items():
+            all_attr += "{}: {} \n".format(attr, value)
+        return all_attr
+
 def simulateMatches(teamOne, teamTwo, simulateCount = 100):
     simulatedMatch = matchSimulator()
     for i in range(simulateCount):
