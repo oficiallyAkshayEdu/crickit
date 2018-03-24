@@ -16,7 +16,7 @@ if sys.argv[-1] == 'travis':
 
     # following IF statement will be executed in sequential order
 
-    # if any stage fails
+    # if any stage fails what is happening?
     # IFF the above thing does not result in error
     if result == 0:
         result = os.system("python crickit/simulate.py")
