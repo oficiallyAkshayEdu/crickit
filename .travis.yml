@@ -1,6 +1,11 @@
-#Defines the language for Travis to build an instance for
+'''
+Defines TRAVIS-CI environment
+'''
+
+# defines what language to test the project in
 language: python
 
+## defines what versions to test it in
 python:
   - "3.3"
   - "3.4"
@@ -8,23 +13,31 @@ python:
   - "3.6"
 #  - "3.7"  # points ot nightly and hence fails. commenting for now.
 
-#changes directory to sub-directory "crickit"
+# installs and updates python
+# then install all declared dependencies
 install:
+# install crickit as a package onto virtual machine
   - pip install -U .
   - pip install -r requirements.txt
 
-#tests both key scripts
+# runs this CLI command with 'travis' as a passed parameter
+# inspect setup.py for more information
+
 script:
   - python setup.py travis
 
-#pushes report to codecov for visualization
+# todo learn command line argument parsing and passing and declaration
+
+# pushes report to codecov for visualization
 after_success:
   - codecov
 
+# deploys to PyPi (pip) to oficiallyAkshay's pip
 deploy:
   provider: pypi
   user: "oficiallyAkshay"
   password:
     secure: "iY2Fx5l6M3v5EfHV+WG9D5vk2x4ngT+F40uCGj8pge93TAEJKKKxLzPnMehRTf4HYWq/flH+aKyvOYRm58WbhoE+t2FQXnxsSCh03HdNY5ZxKatAD5lKR67IrpWAD7dlpB3KhBzJAnsmLkNpN+if+Y7g0XVJxgHxlkn5nZmcWsF4uG5lxhMypWOxX9RIrZ5QVv4m5fWemagASljBCrZ5mKj/0yiYJhspMMnxNiaL0cxUe/vmqp4y+WJ35yOC4BenawP3q5Yo70LE/P50PD7IL4m7vliRtELDTIyqGismwhsn83O7x6/pTtjp5GdgyyX3v9CbpdL4kUX5cuhsTP4IeNQhRAEvO1BpKwuMmSwq2GXezy2CjCa8W91KWjYzwwz7X7YXSKp4fG0qgC8USpE/NxPNb5jDJkUKldE6w7qeBTdfa7UM4zGoIwsBSWLlak9A6I8ohlKs4u1Dovx0XTwesqfIsYItwnt73EYbw4b7myT5L2oX1ni7kR7ZlI4g/W0ooKzBeXLDnKDYh2gt8NGTBuNrpQ0TjHVKnm2Jeo5R2tp9JbFzUZEBzJRHIB8qw6pojzzVPKioGckCChTABm6uGve+Q3tzyDpZsQ0hIJ3tfYx7BI8XujP9+ZF+V0TT+NPJJqvooQ8bKZClkZ0jBH0Nw7+wxDtyGg784E20QnpGDEw="
   on:
+  #only pushes to PyPi IF the Git push has a tag
     tags: true

@@ -1,5 +1,7 @@
 from uuid import uuid4
+
 __all__ = ['Match']
+
 
 class Match:
     def __init__(self):
@@ -22,7 +24,6 @@ class Match:
         # self.winningTeamRuns = 0
         # self.winningTeamWickets = 0
 
-
     def createPlayingOrder(self):
         self.battingOrder.append(self.winner)
         self.battingOrder.append(filter(lambda x: x != self.toss.calledBy, self.playingTeams))
@@ -31,7 +32,10 @@ class Match:
         self.bowlingOrder = self.battingOrder[::-1]
 
     def __repr__(self):
-        return self.matchID
+        all_attr = ""
+        for attr, value in self.__dict__.items():
+            all_attr += "{}: {} \n".format(attr, value)
+        return all_attr
 
     def resetMatch(self):
         self.tossWinningTeam = []

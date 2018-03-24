@@ -1,5 +1,5 @@
 class InningsA():
-    def __init__(self, match):
+    def __init__(self, teamOne, teamTwo, i, match):
         self.battingTeam = []
         self.bowlingTeam = []
         self.delivery_count = 0
@@ -7,4 +7,8 @@ class InningsA():
         self.overs = list()
         self.deliveries = list()
         self.match = match
-        self.innings_number = 0
+        self.innings_number = i
+        teamOne.resetBattingInnings()
+        teamOne.resetBowlingInnings()
+        teamTwo.resetBattingInnings()
+        teamTwo.resetBowlingInnings()

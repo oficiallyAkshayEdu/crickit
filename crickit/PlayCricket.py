@@ -15,12 +15,23 @@ def start_match(match, teamOne, teamTwo):
     # creates Toss object, stores it in the match object
     match.toss = Toss(match)
     match.createPlayingOrder()  # creates playing order (batting and bowling order) within match object
-
+    # for i in range(2):
+    # innings = InningsA(teamOne, teamTwo, 1, match)
+    # innings = InningsA(teamTwo, teamOne, 2, match)
     Innings(teamOne, teamTwo, match)
     Innings(teamTwo, teamOne, match)
     declareMatchWinner(match)
     # teamTwo.runScore = 0
     return match.winner
+
+
+def Innings(battingTeam, bowlingTeam, match):
+    # sets teams runScore to 0
+    battingTeam.resetBattingInnings()
+    bowlingTeam.resetBowlingInnings()
+    while bowlingTeam.overCount < match.OVER_COUNT:
+        over(battingTeam, bowlingTeam, match)
+        bowlingTeam.plusInningsOverCount()
 
 
 def createPlayingTeams(match, teamOne, teamTwo):
@@ -142,15 +153,6 @@ def over(battingTeam, bowlingTeam, match):
         bowlingTeam.plusBallCountPerOver()
         # logger.info(thisOver.deliveries[1])
         # print(match.overs, "\n")
-
-
-def Innings(battingTeam, bowlingTeam, match):
-    # sets teams runScore to 0
-    battingTeam.resetBattingInnings()
-    bowlingTeam.resetBowlingInnings()
-    while bowlingTeam.overCount < match.OVER_COUNT:
-        over(battingTeam, bowlingTeam, match)
-        bowlingTeam.plusInningsOverCount()
 
 
 def declareMatchWinner(match):
