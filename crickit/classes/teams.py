@@ -3,15 +3,15 @@ import random
 
 
 class Teams:
-    allteamobjects = list()
+
     def __init__(self, **stats):
         self.overCount = 0
         self.__dict__.update(stats)
+        # self.runScore = 0
         self.ballTypes = ['wideBall'] * self.wideBall + ["noBall"] * self.noBall+ ['wicketBall'] \
                            * self.wicketBall+ ['regularBall'] * self.regularBall
         # random.shuffle(self.ballTypes)
 
-        # Teams.allteamobjects.append(self)
 
 
     def resetTeam(self):

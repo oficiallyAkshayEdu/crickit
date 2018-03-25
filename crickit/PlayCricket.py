@@ -56,9 +56,9 @@ def Innings(battingTeam, bowlingTeam, match):
         over(battingTeam, bowlingTeam, match)
         bowlingTeam.plusInningsOverCount()
 
-def chooseMatchTeamsForTournament(match):
-    # picks teams from the various defined teams
-    match.playingTeams = random.sample(Teams.listTeams, 2)
+# def chooseMatchTeamsForTournament(match):
+#     # picks teams from the various defined teams
+#     match.playingTeams = random.sample(Teams.listTeams, 2)
 
 
 def coinToss(match):
@@ -170,7 +170,9 @@ def declareMatchWinner(match):
         match.winner = winner
         # match.winner.runscore = match.teamOne.runScore
         # match.winningScore = match.teamOne.runScore
-        match.losingTeam = list(filter(lambda x: x != match.winner, match.playingTeams))[0]
+        match.loser = [x for x in match.playingTeams if x!= match.winner][0]
+
+        # match.loser = list(filter(lambda x: x != match.winner, match.playingTeams))[0]
 
     if __name__ == "__main__":
         match.matchSummary()

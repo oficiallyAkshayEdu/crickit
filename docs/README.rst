@@ -33,6 +33,9 @@ Simulate n Matches between two specific teams
 
 n(default = 100)
 
+Available Variables
+- Overs: List of all overs in that match
+
 Roadmap
 ~~~~~~~
 

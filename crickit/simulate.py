@@ -7,10 +7,12 @@ logger.setLevel('WARNING')
 
 
 class matchSimulator():
+
     def __init__(self):
         self.t1_wins = 0
         self.t2_wins = 0
         self.ties = 0
+        self.matches = list()
 
         #TODO
         self.teamOne = []
@@ -35,6 +37,7 @@ def simulateMatches(teamOne, teamTwo, simulateCount = 100):
     simulatedMatch = matchSimulator()
     for i in range(simulateCount):
         match = playMatch(teamOne, teamTwo)
+        simulatedMatch.matches.append(match)
 
         if match.winner == "draw":
             simulatedMatch.ties += 1

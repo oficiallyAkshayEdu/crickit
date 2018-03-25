@@ -8,16 +8,16 @@ __all__ = ['Match']
 
 class Match:
     def __init__(self):
-        self.match_ID = str(uuid4())
+        self.__match_ID = str(uuid4())
 
         # match sundries
         self.__batting_order = []
-        self.bowlingOrder = []
+        self.__bowling_order = []
         self.OVER_COUNT = 20
         self.overs = list()
 
         # match statistics
-        self.losingTeam = []
+        self.loser = []
         self.losingTeamRuns = 0  # todo
         self.losingTeamWickets = 0  # todo
         self.playingTeams = list()
@@ -35,7 +35,7 @@ class Match:
         # secondTeam = [x for x in self.playingTeams if x != self.toss.calledBy][0]
         # self.__batting_order.append(secondTeam)
         # Reverse batting order to create the bowling order.
-        self.bowlingOrder = self.__batting_order[::-1]
+        self.__bowling_order = self.__batting_order[::-1]
 
     # def __str__(self):
     #     summary = self.matchSummary()
@@ -52,10 +52,10 @@ class Match:
         self.tossCallingTeam = []
         self.tossResult = []
         self.__batting_order = []
-        self.bowlingOrder = []
+        self.__bowling_order = []
         self.winningScore = 0
         self.winner = []
-        self.losingTeam = []
+        self.loser = []
         self.winningTeamRuns = 0
         self.winningTeamWickets = 0
         self.losingTeamRuns = 0
@@ -68,10 +68,10 @@ class Match:
     #     return (
     #         "{} called {}, won the toss and decided to bat. {} won against {} by {} runs and {} wickets in {} "
     #         "overs".format(
-    #                 self.toss.calledBy, self.toss.calledFace, self.winner, self.losingTeam,
+    #                 self.toss.calledBy, self.toss.calledFace, self.winner, self.loser,
     #                 self.runScoreDelta, self.wicketDelta, "TOD"))
 
     def matchSummary(self):
         return ("{}: {} off {} balls and {} wickets \n {}: {} off {} balls and {} wickets \n {} won against {}".format(
-            self.winner, self.winner.runScore, "BALLS", "WICKETS", self.losingTeam, self.losingTeamRuns, "BALLS",
-            "WICKETS", self.winner, self.losingTeam))
+            self.winner, self.winner.runScore, "BALLS", "WICKETS", self.loser, self.losingTeamRuns, "BALLS",
+            "WICKETS", self.winner, self.loser))
