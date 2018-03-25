@@ -17,7 +17,7 @@ class TestCrickit(unittest.TestCase):
     #     pass
 
     def test_WinnerDeclaration(self):
-        match = playMatch("India", "Pakistan")
+        match = play_match("India", "Pakistan")
         series = simulateMatches("India", "Pakistan", 1000)
         self.assertIsInstance(match, Match)
 

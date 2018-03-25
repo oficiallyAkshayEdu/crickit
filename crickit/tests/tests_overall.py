@@ -9,7 +9,7 @@ simulateCount = 100
 
 def CompleteTest():
     # tests a single match
-    match = playMatch("India", "Pakistan")
+    match = play_match("India", "Pakistan")
 
     # tests n simulated matches
     series = simulateMatches("India", "Pakistan", simulateCount)

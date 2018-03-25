@@ -3,7 +3,7 @@ from crickit.PlayCricket import *
 
 __all__ = ['simulateMatches']
 
-logger.setLevel('WARNING')
+# logger.setLevel('WARNING')
 
 
 class matchSimulator():
@@ -36,7 +36,7 @@ class matchSimulator():
 def simulateMatches(teamOne, teamTwo, simulateCount = 100):
     simulatedMatch = matchSimulator()
     for i in range(simulateCount):
-        match = playMatch(teamOne, teamTwo)
+        match = play_match(teamOne, teamTwo)
         simulatedMatch.matches.append(match)
 
         if match.winner == "draw":

@@ -7,7 +7,7 @@ INDIA = {
     'tossCall': "Heads",
     'noBall': 10,
     'wideBall': 5,
-    'wicketBall': 5,
+    # 'wicketBall': 1,
     'regularBall': 65,
     'maxBallDifficulty': 0.75,
     'bestBatSkill': 0.95
@@ -19,7 +19,7 @@ PAKISTAN = {
     'tossCall': "Tails",
     'noBall': 10,
     'wideBall': 5,
-    'wicketBall': 5,
+    # 'wicketBall': 1,
     'regularBall': 65,
     'maxBallDifficulty': 0.75,
     'bestBatSkill': 0.95
@@ -30,7 +30,7 @@ ZIMBABWE = {
     'tossCall': "Tails",
     'noBall': 15,
     'wideBall': 5,
-    'wicketBall': 5,
+    # 'wicketBall': 5,
     'regularBall': 65,
     'maxBallDifficulty': 0.85,
     'bestBatSkill': 0.65

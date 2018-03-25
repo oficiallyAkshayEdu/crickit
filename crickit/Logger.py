@@ -1,12 +1,6 @@
 import logging
 
-# Create a logger object.
-logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.DEBUG)
 
-
-
-handler = logging.StreamHandler()
-formatter = logging.Formatter('%(filename)s (%(lineno)d) | %(levelname)s --> %(funcName)s: %(message)s')
-handler.setFormatter(formatter)
-logger.addHandler(handler)
-
+info = logging.info
+debug = logging.debug

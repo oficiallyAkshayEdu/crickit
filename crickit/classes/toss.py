@@ -19,8 +19,12 @@ class Toss():
     #     return otherTeam
 
     def toss(self):
+
+        # shorten self.match to refer to this toss' match teams and data easily
         match = self.match
         self.faceUp = random.choice(self.coinFaces)
+
+        #TODO replace lambda fx with listcomprehension and lookup
         self.faceDown = ''.join(list(filter(lambda x: x != self.faceUp, self.coinFaces)))  # ensures output is a string
         self.calledBy = random.choice(match.playingTeams)
         self.calledFace = random.choice(self.coinFaces)
@@ -33,6 +37,9 @@ class Toss():
             self.loser = self.calledBy
             self.winner = [x for x in match.playingTeams if x!= self.loser][0]
             # self.winner = self.theOtherTeam(self.loser)
+
+
+
 
     def __repr__(self):
         return "{} called {}. Coin landed {} face up. {} won the toss and decided to bat".format(

@@ -1,5 +1,5 @@
 from uuid import uuid4
-
+from crickit.Logger import *
 # uses UUID to generate unique match IDs
 
 # declares inclusion of ONLY Match class to be imported
@@ -11,31 +11,40 @@ class Match:
         self.__match_ID = str(uuid4())
 
         # match sundries
-        self.__batting_order = []
-        self.__bowling_order = []
-        self.OVER_COUNT = 20
-        self.overs = list()
 
         # match statistics
-        self.loser = []
-        self.losingTeamRuns = 0  # todo
-        self.losingTeamWickets = 0  # todo
         self.playingTeams = list()
-        self.runScoreDelta = 0  # todo
         self.winner = []
-        self.winningScore = 0
+        self.loser = []
+        self.toss = []
+
+        self.overs = list()
+        self.batting_order = []
+        self.__bowling_order = []
+
+        self.OVER_COUNT = 20
+        self.runScoreDelta = 0  # todo
         self.wicketDelta = 0
-        # self.winningTeamRuns = 0
-        # self.winningTeamWickets = 0
+
 
     def createPlayingOrder(self):
-        self.__batting_order.append(self.toss.winner)
-        self.__batting_order.append(self.toss.loser)
+
+        self.toss.winnerscall = random.choice(("bat", "bowl"))
+        # debug(self.toss.winner)
+        if winnerscall =="bat":
+            self.batting_order.append(self.toss.winner)
+            self.batting_order.append(self.toss.loser)
+        else:
+            self.batting_order.append(self.toss.loser)
+            self.batting_order.append(self.toss.winner)
+
+        # self.batting_order.append(self.toss.winner)
+        # self.batting_order.append(self.toss.loser)
         # # find second team of batting order = first element of return list comprehension list
         # secondTeam = [x for x in self.playingTeams if x != self.toss.calledBy][0]
-        # self.__batting_order.append(secondTeam)
+        # self.batting_order.append(secondTeam)
         # Reverse batting order to create the bowling order.
-        self.__bowling_order = self.__batting_order[::-1]
+        self.__bowling_order = self.batting_order[::-1]
 
     # def __str__(self):
     #     summary = self.matchSummary()
@@ -51,7 +60,7 @@ class Match:
         self.tossWinningTeam = []
         self.tossCallingTeam = []
         self.tossResult = []
-        self.__batting_order = []
+        self.batting_order = []
         self.__bowling_order = []
         self.winningScore = 0
         self.winner = []
@@ -73,5 +82,5 @@ class Match:
 
     def matchSummary(self):
         return ("{}: {} off {} balls and {} wickets \n {}: {} off {} balls and {} wickets \n {} won against {}".format(
-            self.winner, self.winner.runScore, "BALLS", "WICKETS", self.loser, self.losingTeamRuns, "BALLS",
+            self.winner, self.winner.runs, "BALLS", "WICKETS", self.loser, self.losingTeamRuns, "BALLS",
             "WICKETS", self.winner, self.loser))

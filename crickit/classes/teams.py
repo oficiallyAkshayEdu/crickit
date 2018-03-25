@@ -5,34 +5,40 @@ import random
 class Teams:
 
     def __init__(self, **stats):
-        self.overCount = 0
+
+        # loads from dict
         self.__dict__.update(stats)
-        # self.runScore = 0
-        self.ballTypes = ['wideBall'] * self.wideBall + ["noBall"] * self.noBall+ ['wicketBall'] \
-                           * self.wicketBall+ ['regularBall'] * self.regularBall
-        # random.shuffle(self.ballTypes)
+
+        #added vars
+        self.runs = 0
+        self.bowled_overs = 0
+        self.extras = 0
+
+
+        self.ballTypes = ['wideBall'] * self.wideBall + ["noBall"] * self.noBall+  ['regularBall'] * self.regularBall
+        random.shuffle(self.ballTypes)
 
 
 
     def resetTeam(self):
-        self.runScore = 0
-        self.overCount = 0
+        self.runs = 0
+        self.bowled_overs = 0
         self.ballCountPerOver = 0
 
-    def addRuns(self, runs=1):
-        self.runScore += runs
+    def addRuns(self, added_runs=1):
+        self.runs += added_runs
 
     def resetRuns(self):
-        self.runScore = 0
+        self.runs = 0
 
     def plusInningsOverCount(self):
-        # if self.overCount < 20:
-        self.overCount += 1
+        # if self.bowled_overs < 20:
+        self.bowled_overs += 1
         # else:
-        #     self.overCount =20
+        #     self.bowled_overs =20
 
     def resetBowlingInnings(self):
-        self.overCount = 0
+        self.bowled_overs = 0
         self.resetBallCountPerOver()
 
     def resetBattingInnings(self):
