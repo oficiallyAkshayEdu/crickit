@@ -8,9 +8,22 @@ __all__ = ['playMatch']
 
 logger.setLevel('DEBUG')
 
+def playMatch(teamOne, teamTwo):
+    # creates a match object
+    match = Match()
+
+    # matches passed team and instantiates it
+    _instantiate_teams(teamOne, match)
+    match.teamOne = match.playingTeams[0]
+    _instantiate_teams(teamTwo, match)
+    match.teamTwo = match.playingTeams[1]
+    start_match(match, match.teamOne, match.teamTwo)
+    return match
 
 def start_match(match, teamOne, teamTwo):
+
     logger.debug("match started between {} and {}".format(teamOne, teamTwo))
+
 
     # creates Toss object, stores it in the match object
     match.toss = Toss(match)
@@ -22,8 +35,18 @@ def start_match(match, teamOne, teamTwo):
     Innings(teamTwo, teamOne, match)
     declareMatchWinner(match)
     # teamTwo.runScore = 0
-    return match.winner
+    # return match.winner
 
+def createPlayingTeams(match, teamOne, teamTwo):
+    match.playingTeams.append(teamOne)
+    match.playingTeams.append(teamTwo)
+
+
+def _instantiate_teams(passedteam, match):
+    for each in TEAMS_LIST:
+        if each['name'] == passedteam:
+            theTeam = Teams(**each)
+            match.playingTeams.append(theTeam)
 
 def Innings(battingTeam, bowlingTeam, match):
     # sets teams runScore to 0
@@ -32,34 +55,6 @@ def Innings(battingTeam, bowlingTeam, match):
     while bowlingTeam.overCount < match.OVER_COUNT:
         over(battingTeam, bowlingTeam, match)
         bowlingTeam.plusInningsOverCount()
-
-
-def createPlayingTeams(match, teamOne, teamTwo):
-    match.playingTeams.append(teamOne)
-    match.playingTeams.append(teamTwo)
-
-
-def instantTeam(*args):
-    for team in TEAMS_LIST:
-        for each in args:
-            if team['name'] == each:
-                theTeam = Teams(**team)
-                return theTeam
-
-
-def playMatch(teamOne, teamTwo):
-    match = Match()
-
-    teamOne = instantTeam(teamOne)
-    match.teamOne = teamOne
-
-    teamTwo = instantTeam(teamTwo)
-    match.teamTwo = teamTwo
-
-    createPlayingTeams(match, teamOne, teamTwo)
-    start_match(match, teamOne, teamTwo)
-    return match
-
 
 def chooseMatchTeamsForTournament(match):
     # picks teams from the various defined teams
@@ -115,9 +110,11 @@ def nextInning(battingTeam, bowlingTeam):
 
 
 def isGameFinished(battingTeam, bowlingTeam):
+    # if battingTeam.wicketsLost ==9:
+
     if hasattr(bowlingTeam, 'runScore') and battingTeam.runScore > bowlingTeam.runScore:
         nextInning(battingTeam, bowlingTeam)
-        # elif battingTeam.wicketCount == 9:
+        # elif battingTeam.wicketsLost == 9:
         #     nextInning(battingTeam, bowlingTeam)
 
 
@@ -133,7 +130,7 @@ def delivery(battingTeam, bowlingTeam, theOver, match):
         # print(runs, "- ", end='', flush=True)
         battingTeam.addRuns(runs)
     elif theBallType == "wicketBall":
-        # print("W", battingTeam.wicketCount, " - ", end='', flush=True)
+        # print("W", battingTeam.wicketsLost, " - ", end='', flush=True)
         battingTeam.boldOut()
     isGameFinished(battingTeam, bowlingTeam)
     # elif theBallType =="wideBall":
@@ -167,11 +164,14 @@ def declareMatchWinner(match):
     # checks if match was a tie and writes to match object
     if match.runScoreDelta == 0:
         match.winner = "draw"
+
     else:
         winner = max(*match.playingTeams, key = operator.attrgetter('runScore'))
         match.winner = winner
+        # match.winner.runscore = match.teamOne.runScore
+        # match.winningScore = match.teamOne.runScore
+        match.losingTeam = list(filter(lambda x: x != match.winner, match.playingTeams))[0]
 
     if __name__ == "__main__":
         match.matchSummary()
 
-    return match.winner

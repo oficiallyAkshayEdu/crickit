@@ -1,23 +1,27 @@
 from uuid import uuid4
 
+# uses UUID to generate unique match IDs
+
+# declares inclusion of ONLY Match class to be imported
 __all__ = ['Match']
 
 
 class Match:
     def __init__(self):
         self.match_ID = str(uuid4())
+
         # match sundries
-        self.battingOrder = []
+        self.__batting_order = []
         self.bowlingOrder = []
         self.OVER_COUNT = 20
         self.overs = list()
 
         # match statistics
-        self.loser = []
-        self.losingTeamRuns = 0
-        self.losingTeamWickets = 0
-        self.playingTeams = []
-        self.runScoreDelta = 0
+        self.losingTeam = []
+        self.losingTeamRuns = 0  # todo
+        self.losingTeamWickets = 0  # todo
+        self.playingTeams = list()
+        self.runScoreDelta = 0  # todo
         self.winner = []
         self.winningScore = 0
         self.wicketDelta = 0
@@ -25,11 +29,17 @@ class Match:
         # self.winningTeamWickets = 0
 
     def createPlayingOrder(self):
-        self.battingOrder.append(self.winner)
-        self.battingOrder.append(filter(lambda x: x != self.toss.calledBy, self.playingTeams))
-
+        self.__batting_order.append(self.toss.winner)
+        self.__batting_order.append(self.toss.loser)
+        # # find second team of batting order = first element of return list comprehension list
+        # secondTeam = [x for x in self.playingTeams if x != self.toss.calledBy][0]
+        # self.__batting_order.append(secondTeam)
         # Reverse batting order to create the bowling order.
-        self.bowlingOrder = self.battingOrder[::-1]
+        self.bowlingOrder = self.__batting_order[::-1]
+
+    # def __str__(self):
+    #     summary = self.matchSummary()
+    #     return summary
 
     def __repr__(self):
         all_attr = ""
@@ -41,11 +51,11 @@ class Match:
         self.tossWinningTeam = []
         self.tossCallingTeam = []
         self.tossResult = []
-        self.battingOrder = []
+        self.__batting_order = []
         self.bowlingOrder = []
         self.winningScore = 0
         self.winner = []
-        self.loser = []
+        self.losingTeam = []
         self.winningTeamRuns = 0
         self.winningTeamWickets = 0
         self.losingTeamRuns = 0
@@ -54,9 +64,14 @@ class Match:
         self.wicketDelta = 0
         self.coinCalledByCallingTeam = ""
 
+    # def matchSummary(self):
+    #     return (
+    #         "{} called {}, won the toss and decided to bat. {} won against {} by {} runs and {} wickets in {} "
+    #         "overs".format(
+    #                 self.toss.calledBy, self.toss.calledFace, self.winner, self.losingTeam,
+    #                 self.runScoreDelta, self.wicketDelta, "TOD"))
+
     def matchSummary(self):
-        print(
-                "{} called {}, won the toss and decided to bat. {} won against {} by {} runs and {} wickets in {} "
-                "overs".format(
-                        self.toss.calledBy, self.toss.calledFace, self.winner, self.loser,
-                        self.runScoreDelta, self.wicketDelta, "TODO"))
+        return ("{}: {} off {} balls and {} wickets \n {}: {} off {} balls and {} wickets \n {} won against {}".format(
+            self.winner, self.winner.runScore, "BALLS", "WICKETS", self.losingTeam, self.losingTeamRuns, "BALLS",
+            "WICKETS", self.winner, self.losingTeam))

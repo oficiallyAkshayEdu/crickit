@@ -1,10 +1,17 @@
 # The Teams class
+import random
+
+
 class Teams:
+    allteamobjects = list()
     def __init__(self, **stats):
-        self.__dict__.update(stats)
-        self.ballTypes = ['wideBall'] * self.wideBall * 100 + ["noBall"] * self.noBall * 100 + ['wicketBall'] \
-                           * self.wicketBall * 100 + ['regularBall'] * (self.regularBall *100)
         self.overCount = 0
+        self.__dict__.update(stats)
+        self.ballTypes = ['wideBall'] * self.wideBall + ["noBall"] * self.noBall+ ['wicketBall'] \
+                           * self.wicketBall+ ['regularBall'] * self.regularBall
+        # random.shuffle(self.ballTypes)
+
+        # Teams.allteamobjects.append(self)
 
 
     def resetTeam(self):
@@ -29,12 +36,12 @@ class Teams:
         self.resetBallCountPerOver()
 
     def resetBattingInnings(self):
-        self.wicketCount = 0
+        self.wicketsLost = 0
         self.resetRuns()
         self.playedOvers = 0
 
     def boldOut(self):
-        self.wicketCount += 1
+        self.wicketsLost += 1
 
     def plusBallCountPerOver(self):
         self.ballCountPerOver += 1
@@ -43,11 +50,11 @@ class Teams:
         self.ballCountPerOver = 0
 
     def __repr__(self):
-        return self.name
-
-
-
-
-        # India = Teams(**INDIA)
-        # Pakistan = Teams(**PAKISTAN)
-        # Zimbabwe = Teams(**ZIMBABWE)
+        if __name__ == '__main__':
+            # return self.name
+            all_attr = ""
+            for attr, value in self.__dict__.items():
+                all_attr += "{}: {} \n".format(attr, value)
+            return all_attr
+        else:
+            return self.name
