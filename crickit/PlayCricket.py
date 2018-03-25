@@ -168,11 +168,8 @@ def declareMatchWinner(match):
     else:
         winner = max(*match.playingTeams, key = operator.attrgetter('runScore'))
         match.winner = winner
-        # match.winner.runscore = match.teamOne.runScore
-        # match.winningScore = match.teamOne.runScore
         match.loser = [x for x in match.playingTeams if x!= match.winner][0]
 
-        # match.loser = list(filter(lambda x: x != match.winner, match.playingTeams))[0]
 
     if __name__ == "__main__":
         match.matchSummary()
