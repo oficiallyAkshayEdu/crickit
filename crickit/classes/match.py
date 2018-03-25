@@ -1,5 +1,6 @@
 from uuid import uuid4
 from crickit.Logger import *
+import random
 # uses UUID to generate unique match IDs
 
 # declares inclusion of ONLY Match class to be imported
@@ -20,31 +21,29 @@ class Match:
 
         self.overs = list()
         self.batting_order = []
-        self.__bowling_order = []
+        self.bowling_order = []
 
         self.OVER_COUNT = 20
         self.runScoreDelta = 0  # todo
         self.wicketDelta = 0
 
 
-    def createPlayingOrder(self):
+    def create_batting_order(self):
 
         self.toss.winnerscall = random.choice(("bat", "bowl"))
-        # debug(self.toss.winner)
-        if winnerscall =="bat":
+        matchlog.info("{} wins the toss, decides to {}".format(self.toss.winner.name.upper(), (self.toss.winnerscall.upper())))
+        if self.toss.winnerscall =="bat":
             self.batting_order.append(self.toss.winner)
             self.batting_order.append(self.toss.loser)
+        elif self.toss.winnerscall == "bowl":
+            self.batting_order.append(self.toss.loser)
+            self.batting_order.append(self.toss.winner)
         else:
-            self.batting_order.append(self.toss.loser)
-            self.batting_order.append(self.toss.winner)
+            error("winnerscall {} out of expected outcome".format(self.toss.winnerscall))
 
-        # self.batting_order.append(self.toss.winner)
-        # self.batting_order.append(self.toss.loser)
-        # # find second team of batting order = first element of return list comprehension list
-        # secondTeam = [x for x in self.playingTeams if x != self.toss.calledBy][0]
-        # self.batting_order.append(secondTeam)
-        # Reverse batting order to create the bowling order.
-        self.__bowling_order = self.batting_order[::-1]
+        self.bowling_order = self.batting_order[::-1]
+        matchlog.info("Batting order: {}".format(self.batting_order))
+        matchlog.info("Bowling order: {}".format(self.bowling_order))
 
     # def __str__(self):
     #     summary = self.matchSummary()
@@ -61,7 +60,7 @@ class Match:
         self.tossCallingTeam = []
         self.tossResult = []
         self.batting_order = []
-        self.__bowling_order = []
+        self.bowling_order = []
         self.winningScore = 0
         self.winner = []
         self.loser = []

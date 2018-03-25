@@ -11,55 +11,58 @@ import logging
 __all__ = ['play_match']
 
 
-def play_match(teamOne, teamTwo):
-    # creates a match object
-
+def play_match(t1, t2):
+    matchlog.info("Match function triggered")
     match = Match()
-    debug("match started with %s and %s", teamOne, teamTwo)
+
+
+    matchlog.debug("Team 1: {}  Team 2: {}".format(t1, t2))
 
     # matches passed team and instantiates it
+    _instantiate_teams(t1, match)
+    _instantiate_teams(t2, match)
 
-    _instantiate_teams(teamOne, match)
-    match.teamOne = match.playingTeams[0]
-
-    _instantiate_teams(teamTwo, match)
-    match.teamTwo = match.playingTeams[1]
-
-    debug("team1 = {} and team2 = {}".format(teamOne, teamTwo))
     _start_match(match)
+
+    #returns match object to be stored as variable by calling function
     return match
 
 def _start_match(match):
 
     # creates Toss object, stores it in the match object
     match.toss = Toss(match)
-    debug("toss object created and stored in match object")
-    debug(match.toss)
-    # match.createPlayingOrder()  # creates playing order (batting and bowling order) within match object
-    # for i in range(2):
-    # innings = InningsA(teamOne, teamTwo, 1, match)
-    # innings = InningsA(teamTwo, teamOne, 2, match)
-    match._inningsCount = 0
-    Innings(match.teamOne, match.teamTwo, match)
-    match._inningsCount = 1
-    Innings(match.teamTwo, match.teamOne, match)
-    declareMatchWinner(match)
-    # teamTwo.runs = 0
-    # return match.winner
 
-def createPlayingTeams(match, teamOne, teamTwo):
-    match.playingTeams.append(teamOne)
-    match.playingTeams.append(teamTwo)
+    match.create_batting_order()  # creates playing order (batting and bowling order) within match object
 
 
-def _instantiate_teams(passedteam, match):
+    for i in range(2):
+        match._inningsCount = i
+        Innings(match, i)
+
+        declareMatchWinner(match)
+
+
+# def createPlayingTeams(match, teamOne, teamTwo):
+#     match.playingTeams.append(teamOne)
+#     match.playingTeams.append(teamTwo)
+
+
+def _instantiate_teams(team, match):
+    '''
+    :param team: (string) inputed by user/script of desired team
+    :param match: current match object
+    :return: none
+    # matches passedteam to list of teams in TEAMS_LIST and creates an instance of that team
+    '''
     for each in TEAMS_LIST:
-        if each['name'] == passedteam:
+        if each['name'] == team:
             theTeam = Teams(**each)
             match.playingTeams.append(theTeam)
 
-def Innings(battingTeam, bowlingTeam, match):
+def Innings(match, i):
     # sets teams runs to 0
+    battingTeam = match.batting_order[i]
+    bowlingTeam = match.bowling_order[i]
     battingTeam.resetBattingInnings()
     bowlingTeam.resetBowlingInnings()
     while bowlingTeam.bowled_overs < match.OVER_COUNT:
@@ -70,9 +73,9 @@ def Innings(battingTeam, bowlingTeam, match):
 # def coinToss(match):
 #     match.toss = Toss()
 #     toss = match.toss
-#     toss.faceUp = random.choice(toss.coinFaces)
+#     toss.faceUp = random.choice(toss.__COIN_FACES)
 #     toss.calledBy = random.choice(match.playingTeams)
-#     toss.calledFace = random.choice(toss.coinFaces)
+#     toss.calledFace = random.choice(toss.__COIN_FACES)
 #     match.tempPlayingTeams = list(match.playingTeams)
 #
 #     if toss.faceUp == toss.calledFace:
@@ -157,7 +160,7 @@ def declareMatchWinner(match):
     :return: none
     """
     # calculates difference between the batting scores of both playing teams
-    match.runScoreDelta = abs(match.teamOne.runs - match.teamTwo.runs)
+    match.runScoreDelta = abs(match.playingTeams[0].runs - match.playingTeams[1].runs)
 
     # checks if match was a tie and writes to match object
     if match.runScoreDelta == 0:

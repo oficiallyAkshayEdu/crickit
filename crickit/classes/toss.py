@@ -1,9 +1,12 @@
 import random
 
+from crickit.Logger import *
+
 
 class Toss():
     def __init__(self, match):
-        self.coinFaces = ["Heads", "Tails"]
+        tosslog.info("Created Toss object")
+        self.__COIN_FACES = ["Heads", "Tails"]
         self.calledFace = ""
         self.calledBy = []
         self.winner = []
@@ -13,35 +16,33 @@ class Toss():
         self.match = match
         self.toss()
 
-    # def theOtherTeam(self, firstTeam):
-    #     otherTeam = (filter(lambda x: x != firstTeam, self.match.playingTeams))
-    #     otherTeam = ', '.join(str(x) for x in otherTeam)  # converts filter object to printable team name for __repr__
-    #     return otherTeam
-
     def toss(self):
 
         # shorten self.match to refer to this toss' match teams and data easily
         match = self.match
-        self.faceUp = random.choice(self.coinFaces)
 
-        #TODO replace lambda fx with listcomprehension and lookup
-        self.faceDown = ''.join(list(filter(lambda x: x != self.faceUp, self.coinFaces)))  # ensures output is a string
+        # tosses coin
+        self.faceUp = random.choice(self.__COIN_FACES)
+        self.faceDown = [x for x in self.__COIN_FACES if x != self.faceUp][0]
         self.calledBy = random.choice(match.playingTeams)
-        self.calledFace = random.choice(self.coinFaces)
+        self.calledFace = random.choice(self.__COIN_FACES)
+        self.calledBy.toss_call = self.calledFace
 
         if self.faceUp == self.calledFace:
             self.winner = self.calledBy
-            self.loser = [x for x in match.playingTeams if x!= self.winner][0]
+            self.loser = [x for x in match.playingTeams if x != self.winner][0]
             # self.loser = self.theOtherTeam(self.winner)
         else:
             self.loser = self.calledBy
-            self.winner = [x for x in match.playingTeams if x!= self.loser][0]
+            self.winner = [x for x in match.playingTeams if x != self.loser][0]
             # self.winner = self.theOtherTeam(self.loser)
+        tosslog.info(self.summary())
 
+    def summary(self):
+        return "{} called {} | Face up: {}  Face down: {} | {} wins,{} loses | ".format(self.calledBy, self.calledFace,
+                                                                                        self.faceUp, self.faceDown,
+                                                                                        self.winner, self.loser)
 
-
-
+    # TODO fix this Repre
     def __repr__(self):
-        return "{} called {}. Coin landed {} face up. {} won the toss and decided to bat".format(
-                self.calledBy, self.calledFace, self.faceUp, self.winner
-                )
+        return self.summary()

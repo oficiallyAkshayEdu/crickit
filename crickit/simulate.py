@@ -3,7 +3,7 @@ from crickit.PlayCricket import *
 
 __all__ = ['simulateMatches']
 
-# logger.setLevel('WARNING')
+# matchlog.setLevel('WARNING')
 
 
 class matchSimulator():
