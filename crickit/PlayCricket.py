@@ -24,15 +24,17 @@ def play_match(t1, t2):
 
     _start_match(match)
 
-    #returns match object to be stored as variable by calling function
+    #returns __match object to be stored as variable by calling function
     return match
 
 def _start_match(match):
 
-    # creates Toss object, stores it in the match object
+    # creates Toss object, stores it in the __match object
     match.toss = Toss(match)
+    #loggProgress
 
-    match.create_batting_order()  # creates playing order (batting and bowling order) within match object
+    # creates playing order (batting and bowling order) within __match object
+    match.create_batting_order()
 
 
     for i in range(2):
@@ -42,22 +44,26 @@ def _start_match(match):
         declareMatchWinner(match)
 
 
-# def createPlayingTeams(match, teamOne, teamTwo):
-#     match.playingTeams.append(teamOne)
-#     match.playingTeams.append(teamTwo)
+# def createPlayingTeams(__match, teamOne, teamTwo):
+#     __match.playing_teams.append(teamOne)
+#     __match.playing_teams.append(teamTwo)
 
 
 def _instantiate_teams(team, match):
     '''
     :param team: (string) inputed by user/script of desired team
-    :param match: current match object
+    :param match: current __match object
     :return: none
     # matches passedteam to list of teams in TEAMS_LIST and creates an instance of that team
     '''
     for each in TEAMS_LIST:
         if each['name'] == team:
+
+            #creates Team object and passes unpacked team dict
             theTeam = Teams(**each)
-            match.playingTeams.append(theTeam)
+
+            #appends team to the __match's playing_teams var
+            match.playing_teams.append(theTeam)
 
 def Innings(match, i):
     # sets teams runs to 0
@@ -68,28 +74,6 @@ def Innings(match, i):
     while bowlingTeam.bowled_overs < match.OVER_COUNT:
         over(battingTeam, bowlingTeam, match)
         bowlingTeam.plusInningsOverCount()
-
-# todo make coinToss accesible via API
-# def coinToss(match):
-#     match.toss = Toss()
-#     toss = match.toss
-#     toss.faceUp = random.choice(toss.__COIN_FACES)
-#     toss.calledBy = random.choice(match.playingTeams)
-#     toss.calledFace = random.choice(toss.__COIN_FACES)
-#     match.tempPlayingTeams = list(match.playingTeams)
-#
-#     if toss.faceUp == toss.calledFace:
-#         toss.winner = toss.calledBy
-#         match.battingOrder.append(toss.calledBy)
-#         match.tempPlayingTeams.remove(toss.calledBy)
-#         match.battingOrder.append(match.tempPlayingTeams[0])
-#     else:
-#         match.tempPlayingTeams.remove(toss.calledBy)
-#         match.battingOrder.append(match.tempPlayingTeams[0])
-#         toss.winner = match.tempPlayingTeams[0]
-#         match.battingOrder.append(toss.calledBy)
-#
-#     match.bowlingOrder = match.battingOrder[::-1]
 
 
 def batHit(battingTeam, bowlingTeam):
@@ -156,20 +140,20 @@ def over(battingTeam, bowlingTeam, match):
 def declareMatchWinner(match):
     """
 
-    :param match: the current match object
+    :param match: the current __match object
     :return: none
     """
     # calculates difference between the batting scores of both playing teams
-    match.runScoreDelta = abs(match.playingTeams[0].runs - match.playingTeams[1].runs)
+    match.runScoreDelta = abs(match.playing_teams[0].runs - match.playing_teams[1].runs)
 
-    # checks if match was a tie and writes to match object
+    # checks if __match was a tie and writes to __match object
     if match.runScoreDelta == 0:
         match.winner = "draw"
 
     else:
-        winner = max(*match.playingTeams, key = operator.attrgetter('runs'))
+        winner = max(*match.playing_teams, key = operator.attrgetter('runs'))
         match.winner = winner
-        match.loser = [x for x in match.playingTeams if x!= match.winner][0]
+        match.loser = [x for x in match.playing_teams if x!= match.winner][0]
 
 
     if __name__ == "__main__":

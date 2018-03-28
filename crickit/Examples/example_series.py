@@ -1,7 +1,6 @@
+import sys
 import crickit
 from crickit.Logger import *
-import os
-import sys
 
 scriptlog.setLevel(logging.WARNING)
 scriptlog.info("Imports Complete")
@@ -16,14 +15,14 @@ else:
     t2 = "Pakistan"
 
 
-matchlog.info("Starting a match between {} and {}".format(t1, t2))
+matchlog.info("Starting a __match between {} and {}".format(t1, t2))
 match = crickit.play_match(t1, t2)
 
-print()
-# print(match.__repr__)
-print(match.loser.wicketsLost, match.winner.wicketsLost)
-print(match.winner.runs, match.winner)
-print(match.loser.runs, match.loser)
+# print()
+# # print(__match.__repr__)
+# print(__match.loser.wicketsLost, __match.winner.wicketsLost)
+# print(__match.winner.runs, __match.winner)
+# print(__match.loser.runs, __match.loser)
 # print(len(crickit.Teams.allteamobjects))
 # print(simulatedMatch.matches[1].winner.runs)
 # print(simulatedMatch.matches[2].winner.runs)

@@ -1,7 +1,7 @@
 from uuid import uuid4
 from crickit.Logger import *
 import random
-# uses UUID to generate unique match IDs
+# uses UUID to generate unique __match IDs
 
 # declares inclusion of ONLY Match class to be imported
 __all__ = ['Match']
@@ -10,22 +10,22 @@ __all__ = ['Match']
 class Match:
     def __init__(self):
         self.__match_ID = str(uuid4())
+        self.OVER_COUNT = 20
 
-        # match sundries
-
-        # match statistics
-        self.playingTeams = list()
-        self.winner = []
-        self.loser = []
+        # object stores
         self.toss = []
+        self.overs = list() # list of all over objects
 
-        self.overs = list()
+        self.playing_teams = list()
+
         self.batting_order = []
         self.bowling_order = []
 
-        self.OVER_COUNT = 20
+        self.winner = []
+        self.loser = []
+
         self.runScoreDelta = 0  # todo
-        self.wicketDelta = 0
+        self.wicketDelta = 0 #todo
 
 
     def create_batting_order(self):
@@ -50,10 +50,11 @@ class Match:
     #     return summary
 
     def __repr__(self):
-        all_attr = ""
-        for attr, value in self.__dict__.items():
-            all_attr += "{}: {} \n".format(attr, value)
-        return all_attr
+        return self.__match_ID
+    #     all_attr = ""
+    #     for attr, value in self.__dict__.items():
+    #         all_attr += "{}: {} \n".format(attr, value)
+    #     return all_attr
 
     def resetMatch(self):
         self.tossWinningTeam = []
@@ -76,7 +77,7 @@ class Match:
     #     return (
     #         "{} called {}, won the toss and decided to bat. {} won against {} by {} runs and {} wickets in {} "
     #         "overs".format(
-    #                 self.toss.calledBy, self.toss.calledFace, self.winner, self.loser,
+    #                 self.toss.__called_by, self.toss.__called_face, self.winner, self.loser,
     #                 self.runScoreDelta, self.wicketDelta, "TOD"))
 
     def matchSummary(self):

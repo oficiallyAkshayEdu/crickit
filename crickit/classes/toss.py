@@ -5,44 +5,67 @@ from crickit.Logger import *
 
 class Toss():
     def __init__(self, match):
+
         tosslog.info("Created Toss object")
+
+        # private constants
         self.__COIN_FACES = ["Heads", "Tails"]
-        self.calledFace = ""
-        self.calledBy = []
+
+        # private
+        self.__match = match
+        self.__called_face = ""
+        self.__called_by = []
+        self.__face_up = []
+        self.__face_down = []
+
+        # public
         self.winner = []
         self.loser = []
-        self.faceUp = []
-        self.faceDown = []
-        self.match = match
-        self.toss()
 
-    def toss(self):
+        # exclude from Dict
+        self.__EXCLUDES = [self.__match, self.__COIN_FACES]
 
-        # shorten self.match to refer to this toss' match teams and data easily
-        match = self.match
+        # fx call
+        self.toss(self.__match)
+
+    def toss(self, match):
 
         # tosses coin
-        self.faceUp = random.choice(self.__COIN_FACES)
-        self.faceDown = [x for x in self.__COIN_FACES if x != self.faceUp][0]
-        self.calledBy = random.choice(match.playingTeams)
-        self.calledFace = random.choice(self.__COIN_FACES)
-        self.calledBy.toss_call = self.calledFace
+        self.__face_up = random.choice(self.__COIN_FACES)
+        self.__face_down = [x for x in self.__COIN_FACES if x != self.__face_up][0]
 
-        if self.faceUp == self.calledFace:
-            self.winner = self.calledBy
-            self.loser = [x for x in match.playingTeams if x != self.winner][0]
-            # self.loser = self.theOtherTeam(self.winner)
+        self.__called_by = random.choice(match.playing_teams)
+        self.__called_face = random.choice(self.__COIN_FACES)
+        self.__called_by.toss_call = self.__called_face
+
+        if self.__face_up == self.__called_face:
+            self.winner = self.__called_by
+            self.loser = [x for x in match.playing_teams if x != self.winner][0]
         else:
-            self.loser = self.calledBy
-            self.winner = [x for x in match.playingTeams if x != self.loser][0]
-            # self.winner = self.theOtherTeam(self.loser)
+            self.loser = self.__called_by
+            self.winner = [x for x in match.playing_teams if x != self.loser][0]
         tosslog.info(self.summary())
+        # tosslog.info(self.debug())
+        self.debug()
 
     def summary(self):
-        return "{} called {} | Face up: {}  Face down: {} | {} wins,{} loses | ".format(self.calledBy, self.calledFace,
-                                                                                        self.faceUp, self.faceDown,
+        return "{} called {} | Face up: {}  Face down: {} | {} wins,{} loses | ".format(self.__called_by, self.__called_face,
+                                                                                        self.__face_up, self.__face_down,
                                                                                         self.winner, self.loser)
 
     # TODO fix this Repre
     def __repr__(self):
         return self.summary()
+
+    def debug(self):
+        for each in self.__dict__:
+            # tosslog.debug(each)
+            for excludes in self.__EXCLUDES:
+                if self.__dict__[each] != excludes:
+                    tosslog.debug("{}: {}".format(each, self.__dict__[each]))
+                #     pass
+        # return self.__dict__
+        # all_attr = ""
+        # for attr, value in self.__dict__.items():
+        #     all_attr += "{}: {}".format(attr, value)
+        # return all_attr

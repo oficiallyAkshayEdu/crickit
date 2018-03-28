@@ -7,8 +7,8 @@ match = crickit.play_match("India", "Pakistan")
 
 # simulatedMatch = crickit.simulateMatches("India","Pakistan", 10)
 
-# print(match.loser.runs, match.loser)
-# print(match.winner.runs, match.winner)
+# print(__match.loser.runs, __match.loser)
+# print(__match.winner.runs, __match.winner)
 print()
 # print(match.__repr__)
 print(match.loser.wicketsLost, match.winner.wicketsLost)
