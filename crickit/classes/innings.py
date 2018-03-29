@@ -1,4 +1,4 @@
-class InningsA():
+class InningsA:
     def __init__(self, teamOne, teamTwo, i, match):
         self.battingTeam = []
         self.bowlingTeam = []

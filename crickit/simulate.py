@@ -6,7 +6,7 @@ __all__ = ['simulateMatches']
 # matchlog.setLevel('WARNING')
 
 
-class matchSimulator():
+class matchSimulator:
 
     def __init__(self):
         self.t1_wins = 0

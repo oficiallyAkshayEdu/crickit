@@ -1,8 +1,4 @@
 
-*.pyc
 /.idea
-dist/
 MANIFEST
-crickit.egg-info/
-crickit/Examples/example_single_match.py
 crickit/Examples/example_single_match.py

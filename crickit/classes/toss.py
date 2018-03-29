@@ -3,7 +3,11 @@ import random
 from crickit.Logger import *
 
 
-class Toss():
+class Toss:
+
+    # todo figure out slots
+    # __slots__ = ('__dict__','__COIN_FACES','__match', '__called_face', '__called_by', '__face_up', '__face_down',
+    # '_winners_call', 'winner','loser')
     def __init__(self, match):
 
         tosslog.info("Created Toss object")
@@ -18,13 +22,13 @@ class Toss():
         self.__face_up = []
         self.__face_down = []
 
+        # protected
+        self._winners_call = ""
+
         # public
         self.winner = []
         self.loser = []
-
-        # exclude from Dict
-        self.__EXCLUDES = [self.__match, self.__COIN_FACES]
-
+        tosslog.info(self.__dict__)
         # fx call
         self.toss(self.__match)
 
@@ -45,27 +49,18 @@ class Toss():
             self.loser = self.__called_by
             self.winner = [x for x in match.playing_teams if x != self.loser][0]
         tosslog.info(self.summary())
-        # tosslog.info(self.debug())
         self.debug()
 
     def summary(self):
-        return "{} called {} | Face up: {}  Face down: {} | {} wins,{} loses | ".format(self.__called_by, self.__called_face,
-                                                                                        self.__face_up, self.__face_down,
+        return "{} called {} | Face up: {}  Face down: {} | {} wins,{} loses | ".format(self.__called_by,
+                                                                                        self.__called_face,
+                                                                                        self.__face_up,
+                                                                                        self.__face_down,
                                                                                         self.winner, self.loser)
 
-    # TODO fix this Repre
     def __repr__(self):
         return self.summary()
 
     def debug(self):
         for each in self.__dict__:
-            # tosslog.debug(each)
-            for excludes in self.__EXCLUDES:
-                if self.__dict__[each] != excludes:
-                    tosslog.debug("{}: {}".format(each, self.__dict__[each]))
-                #     pass
-        # return self.__dict__
-        # all_attr = ""
-        # for attr, value in self.__dict__.items():
-        #     all_attr += "{}: {}".format(attr, value)
-        # return all_attr
+            tosslog.debug("{}: {}".format(each, self.__dict__[each]))

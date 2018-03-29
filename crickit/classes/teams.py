@@ -9,23 +9,20 @@ class Teams:
         # loads from dict
         self.__dict__.update(stats)
 
-        #added vars
+        # added vars
         self.runs = 0
         self.bowled_overs = 0
         self.extras = 0
 
-
-        self.ballTypes = ['wideBall'] * self.wideBall + ["noBall"] * self.noBall+  ['regularBall'] * self.regularBall
+        self.ballTypes = ['wideBall'] * self.wideBall + ["noBall"] * self.noBall + ['regularBall'] * self.regularBall
         random.shuffle(self.ballTypes)
-
-
 
     def resetTeam(self):
         self.runs = 0
         self.bowled_overs = 0
         self.ballCountPerOver = 0
 
-    def addRuns(self, added_runs=1):
+    def addRuns(self, added_runs = 1):
         self.runs += added_runs
 
     def resetRuns(self):
@@ -54,8 +51,6 @@ class Teams:
 
     def resetBallCountPerOver(self):
         self.ballCountPerOver = 0
-
-
 
     def __repr__(self):
         if __name__ == '__main__':

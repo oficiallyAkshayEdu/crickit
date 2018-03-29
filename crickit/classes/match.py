@@ -1,4 +1,4 @@
-from uuid import uuid4
+
 from crickit.Logger import *
 import random
 # uses UUID to generate unique __match IDs
@@ -9,7 +9,7 @@ __all__ = ['Match']
 
 class Match:
     def __init__(self):
-        self.__match_ID = str(uuid4())
+
         self.OVER_COUNT = 20
 
         # object stores
@@ -30,31 +30,23 @@ class Match:
 
     def create_batting_order(self):
 
-        self.toss.winnerscall = random.choice(("bat", "bowl"))
-        matchlog.info("{} wins the toss, decides to {}".format(self.toss.winner.name.upper(), (self.toss.winnerscall.upper())))
-        if self.toss.winnerscall =="bat":
-            self.batting_order.append(self.toss.winner)
-            self.batting_order.append(self.toss.loser)
-        elif self.toss.winnerscall == "bowl":
-            self.batting_order.append(self.toss.loser)
-            self.batting_order.append(self.toss.winner)
-        else:
-            error("winnerscall {} out of expected outcome".format(self.toss.winnerscall))
+        self.toss._winners_call = random.choice(("bat", "bowl"))
 
+        if self.toss._winners_call =="bat":
+            self.batting_order.append(self.toss.winner)
+            self.batting_order.append(self.toss.loser)
+        elif self.toss._winners_call == "bowl":
+            self.batting_order.append(self.toss.loser)
+            self.batting_order.append(self.toss.winner)
+
+        #bowling order = reverse of batting order
         self.bowling_order = self.batting_order[::-1]
+
+        matchlog.info(
+            "{} wins the toss, decides to {}".format(self.toss.winner.name.upper(), (self.toss._winners_call.upper())))
         matchlog.info("Batting order: {}".format(self.batting_order))
         matchlog.info("Bowling order: {}".format(self.bowling_order))
 
-    # def __str__(self):
-    #     summary = self.matchSummary()
-    #     return summary
-
-    def __repr__(self):
-        return self.__match_ID
-    #     all_attr = ""
-    #     for attr, value in self.__dict__.items():
-    #         all_attr += "{}: {} \n".format(attr, value)
-    #     return all_attr
 
     def resetMatch(self):
         self.tossWinningTeam = []

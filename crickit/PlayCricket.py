@@ -1,12 +1,8 @@
 import operator
+from decimal import Decimal
 
-from crickit.Logger import *
 from crickit.classes import *
 from crickit.teamsList import *
-from decimal import Decimal
-import logging
-
-
 
 __all__ = ['play_match']
 
@@ -38,7 +34,7 @@ def _start_match(match):
 
 
     for i in range(2):
-        match._inningsCount = i
+        match.innings_count = i
         Innings(match, i)
 
         declareMatchWinner(match)
@@ -106,7 +102,7 @@ def nextInning(battingTeam, bowlingTeam):
 def isGameFinished(battingTeam, bowlingTeam, match):
     if battingTeam.wicketsLost == 9:
         nextInning(battingTeam, bowlingTeam)
-    if match._inningsCount == 1 and bowlingTeam.runs < battingTeam.runs:
+    if match.innings_count == 1 and bowlingTeam.runs < battingTeam.runs:
         nextInning(battingTeam, bowlingTeam)
 
 def delivery(battingTeam, bowlingTeam, theOver, match):

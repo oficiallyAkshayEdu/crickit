@@ -5,8 +5,8 @@ matchlog.info("Crickit Imported Successfully")
 
 match = crickit.play_match("India", "Pakistan")
 
-# simulatedMatch = crickit.simulateMatches("India","Pakistan", 10)
 
+# simulatedMatch = crickit.simulateMatches("India","Pakistan", 10)
 # print(__match.loser.runs, __match.loser)
 # print(__match.winner.runs, __match.winner)
 print()
