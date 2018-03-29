@@ -1,7 +1,7 @@
 
 from crickit.Logger import *
 import random
-# uses UUID to generate unique __match IDs
+
 
 # declares inclusion of ONLY Match class to be imported
 __all__ = ['Match']
@@ -24,8 +24,11 @@ class Match:
         self.winner = []
         self.loser = []
 
-        self.runScoreDelta = 0  # todo
-        self.wicketDelta = 0 #todo
+        # added vars
+        self.winning_score = 0 #TODO
+        self.runs_delta = 0 #TODO
+        self.wickets_delta = 0 #TODO
+        self.innings_count = 0
 
 
     def create_batting_order(self):
@@ -48,29 +51,12 @@ class Match:
         matchlog.info("Bowling order: {}".format(self.bowling_order))
 
 
-    def resetMatch(self):
-        self.tossWinningTeam = []
-        self.tossCallingTeam = []
-        self.tossResult = []
-        self.batting_order = []
-        self.bowling_order = []
-        self.winningScore = 0
-        self.winner = []
-        self.loser = []
-        self.winningTeamRuns = 0
-        self.winningTeamWickets = 0
-        self.losingTeamRuns = 0
-        self.losingTeamWickets = 0
-        self.runScoreDelta = 0
-        self.wicketDelta = 0
-        self.coinCalledByCallingTeam = ""
-
-    # def matchSummary(self):
+   # def matchSummary(self):
     #     return (
     #         "{} called {}, won the toss and decided to bat. {} won against {} by {} runs and {} wickets in {} "
     #         "overs".format(
     #                 self.toss.__called_by, self.toss.__called_face, self.winner, self.loser,
-    #                 self.runScoreDelta, self.wicketDelta, "TOD"))
+    #                 self.runs_delta, self.wickets_delta, "TOD"))
 
     def matchSummary(self):
         return ("{}: {} off {} balls and {} wickets \n {}: {} off {} balls and {} wickets \n {} won against {}".format(

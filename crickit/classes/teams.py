@@ -10,6 +10,10 @@ class Teams:
         self.__dict__.update(stats)
 
         # added vars
+        self.ballCountPerOver = 0 #TODO
+        self.wicketsLost = 0 #TODO
+        self.playedOvers = 0 #TODO
+        self.ballCountPerOver = 0 #TODO
         self.runs = 0
         self.bowled_overs = 0
         self.extras = 0
@@ -20,7 +24,7 @@ class Teams:
     def resetTeam(self):
         self.runs = 0
         self.bowled_overs = 0
-        self.ballCountPerOver = 0
+        self.ballCountPerOver = 0 #todo Outide scope declaration
 
     def addRuns(self, added_runs = 1):
         self.runs += added_runs
