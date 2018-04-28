@@ -1,4 +1,5 @@
-
 /.idea
 MANIFEST
-crickit/Examples/example_single_match.py
+MANIFEST.in
+*.pyc
+
