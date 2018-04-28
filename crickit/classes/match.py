@@ -29,6 +29,18 @@ class Match:
         self.runs_delta = 0 #TODO
         self.wickets_delta = 0 #TODO
         self.innings_count = 0
+        self.first_innings = []
+        self.second_innings = []
+
+        # balling stats
+        self.balls_thrown = 0 #TODO
+        self.extras = 0 #TODO
+        self.singles = 0 #TODO
+        self.dot_balls = 0 #TODO
+        self.sixes = 0 #TODO
+        self.fours = 0 #TODO
+        self.over_count = len(self.overs) #TODO
+
 
 
     def create_batting_order(self):

@@ -57,18 +57,15 @@ def _instantiate_teams(team, match):
 
 def _play_innings(match, i):
     if i == 0:
+        matchlog.debug("First Innings created")
         innings = InningsA(match, i)
         match.first_innings = innings
     elif i == 1:
+        matchlog.debug("Second Innings created")
         innings = InningsA(match,i)
         match.second_innings = innings
 
-    # sets teams runs to 0
-    # battingTeam = match.batting_order[i]
-    # bowlingTeam = match.bowling_order[i]
 
-    innings.battingTeam.resetBattingInnings()
-    innings.bowlingTeam.resetBowlingInnings()
     while innings.bowlingTeam.bowled_overs < match.OVER_COUNT:
         over(innings.battingTeam, innings.bowlingTeam, match)
         innings.bowlingTeam.plusInningsOverCount()

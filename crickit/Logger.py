@@ -25,6 +25,7 @@ matchlog = logging.getLogger('MATCH')
 serieslog = logging.getLogger('SERIES')
 scriptlog = logging.getLogger('SCRIPT')
 tosslog = logging.getLogger('TOSS')
+inningslog = logging.getLogger('INNINGS')
 
 LOGS = [matchlog, serieslog, scriptlog, tosslog]
 
