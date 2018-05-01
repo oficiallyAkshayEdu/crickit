@@ -1,4 +1,4 @@
-from crickit.Logger import *
+from cricket.Logger import *
 
 class InningsA:
     def __init__(self, match, i):
@@ -8,7 +8,7 @@ class InningsA:
 
         self.battingTeam = match.batting_order[i]
         self.bowlingTeam = match.bowling_order[i]
-        print("hello")
+
 
         inningslog.info("Innings Number: {}. {} is bating, {} is bowling".format(self.innings_number, self.battingTeam, self.bowlingTeam))
 

@@ -4,7 +4,7 @@ Crick-It
 |Build Status| |codecov| |Maintainability| |contributions welcome|
 |GitHub version| |Open Source Love| |MIT Licence| |GitHub issues|
 
-Crickit is a text-based cricket simulator.
+cricket is a text-based cricket simulator.
 
 Available teams
 ~~~~~~~~~~~~~~~
@@ -75,12 +75,12 @@ The MIT License
 
 .. _Akshay Agrawal: https://en.wikipedia.org/wiki/Akshay_Agrawal
 
-.. |Build Status| image:: https://travis-ci.org/oficiallyAkshayEdu/crickit.svg?branch=master
-   :target: https://travis-ci.org/oficiallyAkshayEdu/crickit
-.. |codecov| image:: https://codecov.io/gh/oficiallyAkshayEdu/crickit/branch/master/graph/badge.svg
-   :target: https://codecov.io/gh/oficiallyAkshayEdu/crickit
+.. |Build Status| image:: https://travis-ci.org/oficiallyAkshayEdu/cricket.svg?branch=master
+   :target: https://travis-ci.org/oficiallyAkshayEdu/cricket
+.. |codecov| image:: https://codecov.io/gh/oficiallyAkshayEdu/cricket/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/oficiallyAkshayEdu/cricket
 .. |Maintainability| image:: https://api.codeclimate.com/v1/badges/28613489cf646368e3cd/maintainability
-   :target: https://codeclimate.com/github/oficiallyAkshayEdu/crickit/maintainability
+   :target: https://codeclimate.com/github/oficiallyAkshayEdu/cricket/maintainability
 .. |contributions welcome| image:: https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat
    :target: https://github.com/dwyl/esta/issues
 .. |GitHub version| image:: https://badge.fury.io/gh/oficiallyAkshayEdu%2Fcrickit.svg
@@ -89,5 +89,5 @@ The MIT License
    :target: https://github.com/ellerbrock/open-source-badges/
 .. |MIT Licence| image:: https://badges.frapsoft.com/os/mit/mit.svg?v=103
    :target: https://opensource.org/licenses/mit-license.php
-.. |GitHub issues| image:: https://img.shields.io/github/issues/oficiallyAkshayEdu/crickit.svg
-   :target: https://github.com/oficiallyAkshayEdu/crickit/issues
+.. |GitHub issues| image:: https://img.shields.io/github/issues/oficiallyAkshayEdu/cricket.svg
+   :target: https://github.com/oficiallyAkshayEdu/cricket/issues

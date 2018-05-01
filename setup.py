@@ -10,11 +10,11 @@ from distutils.core import setup
 # if last argument is 'travis'
 if sys.argv[-1] == 'travis':
 
-    result = os.system("python crickit/tests/tests_overall.py")
+    result = os.system("python cricket/tests/tests_overall.py")
 
     # WHEN and IFF previous 'if' commands execute without error
     if result == 0:
-        os.system("coverage run crickit/tests/tests_overall.py")
+        os.system("coverage run cricket/tests/tests_overall.py")
         os.system("coverage report")
         sys.exit()
 
@@ -31,14 +31,14 @@ def readme():
 
 
 setup(
-        name = 'crickit',
+        name = 'cricket',
         version = '0.0.126',
-        # packages=['crickit, '],
-        url = "https://github.com/oficiallyAkshayEdu/crickit",
+        # packages=['cricket, '],
+        url = "https://github.com/oficiallyAkshayEdu/cricket",
         license = 'MIT',
         author = 'Akshay Agrawal',
         author_email = '',
         description = 'Text based Cricket Simulator in Python',
         long_description = readme(),
-        packages = ['crickit', 'crickit/classes', 'crickit/tests']
+        packages = ['cricket', 'cricket/classes', 'cricket/tests']
         )

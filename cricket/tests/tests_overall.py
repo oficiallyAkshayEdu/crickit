@@ -1,4 +1,4 @@
-from crickit import *
+from cricket import *
 import os
 import sys
 
@@ -9,7 +9,7 @@ simulateCount = 100
 
 
 def CompleteTest():
-    # tests a single match
+    # tests a single __match
     match = play_match("India", "Pakistan")
 
     # tests n simulated matches

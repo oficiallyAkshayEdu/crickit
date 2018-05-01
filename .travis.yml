@@ -11,7 +11,7 @@ python:
 # installs and updates python
 # then install all declared dependencies
 install:
-# install crickit as a package onto virtual machine
+# install cricket as a package onto virtual machine
   - pip install -U .
   - pip install -r requirements.txt
 

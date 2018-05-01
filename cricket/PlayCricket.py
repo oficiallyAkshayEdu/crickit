@@ -1,8 +1,8 @@
 import operator
 from decimal import Decimal
 
-from crickit.classes import *
-from crickit.teamsList import *
+from cricket.classes import *
+from cricket.teamsList import *
 
 __all__ = ['play_match']
 
@@ -151,4 +151,4 @@ def declareMatchWinner(match):
         match.loser = [x for x in match.playing_teams if x != match.winner][0]
 
     if __name__ == "__main__":
-        match.matchSummary()
+        match.match_summary()

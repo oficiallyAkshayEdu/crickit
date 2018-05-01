@@ -1,4 +1,4 @@
-from crickit import *
+from cricket import *
 import os
 import sys
 import unittest
@@ -7,10 +7,10 @@ import unittest
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 
-# import crickit
+# import cricket
 
 
-# from crickit.classes import *
+# from cricket.classes import *
 
 
 class TestCrickit(unittest.TestCase):

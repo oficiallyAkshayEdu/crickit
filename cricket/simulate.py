@@ -1,5 +1,5 @@
-from crickit.Logger import *
-from crickit.PlayCricket import *
+from cricket.Logger import *
+from cricket.PlayCricket import *
 
 __all__ = ['simulateMatches']
 
