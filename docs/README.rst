@@ -75,9 +75,9 @@ The MIT License
 
 .. _Akshay Agrawal: https://en.wikipedia.org/wiki/Akshay_Agrawal
 
-.. |Build Status| image:: https://travis-ci.org/oficiallyAkshayEdu/cricket.svg?branch=master
+.. |Build Status| image:: https://api.travis-ci.org/oficiallyAkshayEdu/crickit.svg?branch=master
    :target: https://travis-ci.org/oficiallyAkshayEdu/cricket
-.. |codecov| image:: https://codecov.io/gh/oficiallyAkshayEdu/cricket/branch/master/graph/badge.svg
+.. |codecov| image:: https://codecov.io/gh/oficiallyAkshayEdu/crickit/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/oficiallyAkshayEdu/cricket
 .. |Maintainability| image:: https://api.codeclimate.com/v1/badges/28613489cf646368e3cd/maintainability
    :target: https://codeclimate.com/github/oficiallyAkshayEdu/cricket/maintainability
